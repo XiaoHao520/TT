@@ -505,6 +505,8 @@ class OrderSubmitForm extends Model
                     array_push($attr_id_list, $item['attr_id']);
                 }
                 $_goods = Goods::findOne($goods->goods_id);
+                $order_detail->tpl_user=$_goods->tpl_user;
+
                 if (!$_goods->numSub($attr_id_list, $order_detail->num)) {
                     $t->rollBack();
                     return [

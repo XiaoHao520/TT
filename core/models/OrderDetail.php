@@ -17,6 +17,7 @@ use Yii;
  * @property string $attr
  * @property string $pic
  * @property string $integral
+ * @property string tpl_user
  */
 class OrderDetail extends \yii\db\ActiveRecord
 {
@@ -37,7 +38,8 @@ class OrderDetail extends \yii\db\ActiveRecord
             [['order_id', 'goods_id', 'attr'], 'required'],
             [['order_id', 'goods_id', 'num', 'addtime', 'is_delete', 'integral'], 'integer'],
             [['total_price'], 'number'],
-            [['attr','pic'], 'string'],
+            [['attr','pic','tpl_user'], 'string'],
+            [['tpl_user'], 'default','value'=>0],
         ];
     }
 
@@ -57,6 +59,7 @@ class OrderDetail extends \yii\db\ActiveRecord
             'attr' => '商品规格',
             'pic' => '商品规格图片',
             'integral' => '获取积分',
+            'tpl_user'=>'接收模板消息的用户ID'
         ];
     }
 }

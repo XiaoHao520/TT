@@ -8,6 +8,7 @@
 
 namespace app\models;
 
+use Curl\Curl;
 use luweiss\wechat\Wechat;
 
 /**
@@ -65,8 +66,11 @@ class WechatTplMsgSender
             foreach ($goods_list as $goods) {
                 $goods_names .= $goods['name'];
             }
+
+
+
             $data = [
-                'touser' => $this->user->wechat_open_id,
+          'touser' => $this->user->wechat_open_id,
                 'template_id' => $this->wechat_template_message->pay_tpl,
                 'form_id' => $this->form_id->form_id,
                 'page' => 'pages/order/order?status=1',
@@ -76,20 +80,25 @@ class WechatTplMsgSender
                         'color' => '#333333',
                     ],
                     'keyword2' => [
-                        'value' => date('Y-m-d H:i:s', $this->order->pay_time),
+                        'value' => $this->order->mobile,
                         'color' => '#333333',
                     ],
                     'keyword3' => [
                         'value' => $this->order->pay_price,
                         'color' => '#333333',
                     ],
+                    'keyword5' => [
+                        'value' => date('Y-m-d H:i:s', $this->order->pay_time),
+                        'color' => '#333333',
+                    ],
+
                     'keyword4' => [
                         'value' => $goods_names,
                         'color' => '#333333',
                     ],
                 ],
             ];
-            $this->sendTplMsg($data);
+       $this->sendTplMsg($data);
         } catch (\Exception $e) {
             \Yii::warning($e->getMessage());
         }
@@ -231,6 +240,7 @@ class WechatTplMsgSender
 
     private function sendTplMsg($data)
     {
+
         $access_token = $this->wechat->getAccessToken();
         $api = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token={$access_token}";
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -239,5 +249,7 @@ class WechatTplMsgSender
         if (!empty($res['errcode']) && $res['errcode'] != 0) {
             \Yii::warning("模板消息发送失败：\r\ndata=>{$data}\r\nresponse=>" . json_encode($res, JSON_UNESCAPED_UNICODE));
         }
+
+
     }
 }

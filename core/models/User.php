@@ -50,11 +50,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['type', 'addtime', 'is_delete', 'store_id', 'is_distributor', 'parent_id', 'time', 'is_clerk', 'we7_uid', 'shop_id', 'level','dock_id'], 'integer'],
+            [['type', 'addtime', 'is_delete', 'store_id', 'is_distributor', 'parent_id', 'time', 'is_clerk', 'we7_uid', 'shop_id', 'level', 'dock_id'], 'integer'],
             [['username', 'password', 'auth_key', 'access_token', 'avatar_url'], 'required'],
             [['avatar_url'], 'string'],
             [['total_price', 'price', 'integral', 'total_integral'], 'number'],
             [['username', 'password', 'auth_key', 'access_token', 'wechat_open_id', 'wechat_union_id', 'nickname'], 'string', 'max' => 255],
+
         ];
     }
 
@@ -88,7 +89,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'level' => '会员等级',
             'integral' => '用户当前积分',
             'total_integral' => '用户总积分',
-            'dock_id'=>0
+            'dock_id' => 0,
+
         ];
     }
 
@@ -163,7 +165,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function getCount($id)
     {
-        return Order::find()->where(['is_delete'=>0,'is_cancel'=>0,'user_id'=>$id])->count();
+        return Order::find()->where(['is_delete' => 0, 'is_cancel' => 0, 'user_id' => $id])->count();
     }
 
     /**
@@ -172,12 +174,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function getCouponcount($id)
     {
-        return UserCoupon::find()->where(['is_delete'=>0,'user_id'=>$id])->count();
+        return UserCoupon::find()->where(['is_delete' => 0, 'user_id' => $id])->count();
     }
+
     /**
      * 获取卡券
      */
-    public static function getCardCount($id){
-        return UserCard::find()->where(['is_delete'=>0,'user_id'=>$id])->count();
+    public static function getCardCount($id)
+    {
+        return UserCard::find()->where(['is_delete' => 0, 'user_id' => $id])->count();
     }
 }

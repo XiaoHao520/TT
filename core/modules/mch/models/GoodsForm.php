@@ -60,6 +60,7 @@ class GoodsForm extends Model
     public $dock;
     public $parameter;
     public $dock_id;
+    public $tpl_user;
 
     /**
      * @return array
@@ -72,7 +73,7 @@ class GoodsForm extends Model
             [['store_id', 'sort', 'virtual_sales', 'freight', 'share_type', 'quick_purchase', 'hot_cakes'], 'integer'],
             [['price', 'original_price', 'weight'], 'number'],
             [['price',], 'number', 'min' => 0.01,],
-            [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', ], 'string'],
+            [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', 'tpl_user'], 'string'],
             [['name', 'capacity'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 1000],
             [['virtual_sales', 'timelong'], 'default', 'value' => 0],
@@ -114,7 +115,8 @@ class GoodsForm extends Model
             'goods_num' => '商品库存',
             'dock' => '码头',
             'dock_id' => '码头id',
-            'address'=>'商品地址'
+            'address'=>'商品地址',
+            'tel_user'=>'接收模板消息的用户ID'
 
         ];
     }
@@ -207,18 +209,13 @@ class GoodsForm extends Model
             $goods->parameter = $this->parameter;
             //$goods->address = $this->address;
             $goods->dock_id = $this->dock_id;
-
             /* 要注意的代码*/
-
-
-
-
             $dock=Dock::findOne(['id'=>$this->dock_id]);
             $goods->dock=$dock->name;
-
             $goods->address=$dock->address;
             $goods->latitude=$dock->latitude;
             $goods->longitude=$dock->longitude;
+            $goods->tpl_user=$this->tpl_user;
             if ($goods->save()) {
                 //多分类设置
                 GoodsCat::updateAll(['is_delete' => 1], ['goods_id' => $goods->id]);
@@ -319,9 +316,15 @@ class GoodsForm extends Model
                     $attr_model->attr_name = $a['attr_name'];
                     $attr_model->attr_group_id = $attr_group_model->id;
                     $attr_model->is_delete = 0;
-                     $attr_model->attr_detail=$a['attr_detail'];
+                    $attr_model->attr_detail=$a['attr_detail'];
+
                     $attr_model->save();
+                }else{
+
+                     Attr::updateAll(["attr_detail"=>$a['attr_detail'],'is_delete'=>0],['attr_group_id' => $attr_group_model->id, 'attr_name' => $a['attr_name'], 'is_delete' => 0]);
+
                 }
+
 
 
                 $new_attr_item['attr_list'][] = [

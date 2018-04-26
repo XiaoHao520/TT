@@ -44,7 +44,8 @@ use yii\helpers\VarDumper;
  * @property integer $dock_id
  * @property double $latitude
  * @property double $longitude
- * @property String $time
+ * @property string $time
+ * @property string $tpl_user
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -67,8 +68,8 @@ class Goods extends \yii\db\ActiveRecord
             [['price', 'original_price', 'share_commission_first', 'share_commission_second', 'share_commission_third', 'weight','latitude','longitude'], 'number'],
             [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock'], 'string'],
             [['name', 'unit','timelong'], 'string', 'max' => 255],
-            [['service'], 'string', 'max' => 2000],
-
+            [['service','tpl_user'], 'string', 'max' => 2000],
+            [['tpl_user'],'default','value'=>0]
         ];
     }
 
@@ -106,7 +107,8 @@ class Goods extends \yii\db\ActiveRecord
             'use_attr' => '是否使用规格：0=不使用，1=使用',
             'share_type' => '佣金配比 0--百分比 1--固定金额',
             'timelong'=>'时长',
-            'capacity'=>"核载人数"
+            'capacity'=>"核载人数",
+            'tpl_user'=>'接收模板消息的用户ID'
         ];
     }
 

@@ -24,9 +24,10 @@ class LoginForm extends Model
     public $encrypted_data;
     public $iv;
     public $signature;
-
+   public $wechat;
     public $store_id;
 
+     private $curl;
     public function rules()
     {
         return [
@@ -46,6 +47,8 @@ class LoginForm extends Model
                 'data' => $res,
             ];
         }
+
+         $this->wechat=$this->getWechat();
         $session_key = $res['session_key'];
         require __DIR__ . '/wxbdc/WXBizDataCrypt.php';
         $pc = new \WXBizDataCrypt($this->wechat_app->app_id, $session_key);
@@ -68,6 +71,9 @@ class LoginForm extends Model
                 $user->nickname = preg_replace('/[\xf0-\xf7].{3}/', '', $data['nickName']);
                 $user->avatar_url = $data['avatarUrl'];
                 $user->store_id = $this->store_id;
+
+
+
                 $user->save();
                 $same_user = User::find()->select('id')->where([
                     'AND',
@@ -84,6 +90,9 @@ class LoginForm extends Model
                     $user = $same_user;
                 }
             }
+
+
+
             $share = Share::findOne(['user_id' => $user->parent_id]);
             $share_user = User::findOne(['id' => $share->user_id]);
             return [
@@ -98,6 +107,7 @@ class LoginForm extends Model
                     'id' => $user->id,
                     'is_clerk' => $user->is_clerk,
                     'integral' => $user->integral,
+
                 ],
             ];
         } else {

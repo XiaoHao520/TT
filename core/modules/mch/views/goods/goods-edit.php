@@ -352,6 +352,19 @@ if (!$returnUrl)
                                    value="<?= $goods['capacity'] ?>">
                         </div>
                     </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-3 text-right">
+                            <label class=" col-form-label">接收通知短信的电话</label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control short-row" type="text" name="model[tpl_user]"
+                                   value="<?= $goods['tpl_user'] ?>">
+                        </div>
+
+                        <span style="color: red">请用英文逗号隔开</span>
+                    </div>
                     <div class="form-group row">
                         <div class="col-3 text-right">
                             <label class=" col-form-label">时长(单位:小时)</label>

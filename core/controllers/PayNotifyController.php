@@ -99,7 +99,7 @@ class PayNotifyController extends Controller
 
             $wechat_tpl_meg_sender = new WechatTplMsgSender($order->store_id, $order->id, $wechat);
             $wechat_tpl_meg_sender->payMsg();
-            Sms::send($order->store_id, $order->order_no);
+            Sms::send($order->store_id, $order->order_no,$order);
 
             OrderMessage::set($order->id, $order->store_id);
 
