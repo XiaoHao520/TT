@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bc3d8505-41cc-40ea-a6aa-189ff55738d1" name="TT" url="http://118.89.27.146">
+        <fileTransfer host="118.89.27.146" port="21" rootFolder="/addons/zjhj_mall">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
