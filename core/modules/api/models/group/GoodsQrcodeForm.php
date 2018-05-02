@@ -99,16 +99,16 @@ class GoodsQrcodeForm extends Model
         //调整用户头像图片
         $editor->resizeExactWidth($user_pic, 68);
         //附加用户头像图片
-        $editor->blend($goods_qrcode, $user_pic, 'normal', 1.0, 'top-left', 30, 30);
+        $editor->blend($goods_qrcode, $user_pic, 'normal', 1.0, 'top-left', 30, 70);
 
         // 用户名处理
         $username = $this->setName($user->nickname);
         $editor->text($goods_qrcode, $username, 15, 128, 56, new Color('#5b85cf'), $font_path, 0);
         $namewitch = imagettfbbox(15, 0, $font_path, $username);
-        $editor->text($goods_qrcode, '分享给你一个商品', 15, (132 + $namewitch[2]), 56, new Color('#353535'), $font_path, 0);
+        $editor->text($goods_qrcode, '分享给你一个商品', 15, (132 + $namewitch[2]), 66, new Color('#353535'), $font_path, 0);
 
         //裁剪商品图片
-        $editor->resizeFill($goods_pic, 690, 690);
+        $editor->resizeFill($goods_pic, 690, 390);
         //附加商品图片
         $editor->blend($goods_qrcode, $goods_pic, 'normal', 1.0, 'top-left', 30, 126);
 

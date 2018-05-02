@@ -54,6 +54,7 @@ class OrderSubmitForm extends Model
             [['address_id',], 'required', 'on' => "EXPRESS"],
             [['address_name', 'address_mobile'], 'required', 'on' => "OFFLINE"],
             [['offline'], 'default', 'value' => 1],
+            [['baoxian'],'default','value'=>0]
         ];
     }
 

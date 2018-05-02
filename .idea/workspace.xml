@@ -12,9 +12,12 @@
       <change beforePath="$PROJECT_DIR$/core/models/OrderDetail.php" afterPath="$PROJECT_DIR$/core/models/OrderDetail.php" />
       <change beforePath="$PROJECT_DIR$/core/models/User.php" afterPath="$PROJECT_DIR$/core/models/User.php" />
       <change beforePath="$PROJECT_DIR$/core/models/WechatTplMsgSender.php" afterPath="$PROJECT_DIR$/core/models/WechatTplMsgSender.php" />
+      <change beforePath="$PROJECT_DIR$/core/modules/api/models/GoodsQrcodeForm.php" afterPath="$PROJECT_DIR$/core/modules/api/models/GoodsQrcodeForm.php" />
       <change beforePath="$PROJECT_DIR$/core/modules/api/models/LoginForm.php" afterPath="$PROJECT_DIR$/core/modules/api/models/LoginForm.php" />
       <change beforePath="$PROJECT_DIR$/core/modules/api/models/OrderPayDataForm.php" afterPath="$PROJECT_DIR$/core/modules/api/models/OrderPayDataForm.php" />
       <change beforePath="$PROJECT_DIR$/core/modules/api/models/OrderSubmitForm.php" afterPath="$PROJECT_DIR$/core/modules/api/models/OrderSubmitForm.php" />
+      <change beforePath="$PROJECT_DIR$/core/modules/api/models/group/GoodsQrcodeForm.php" afterPath="$PROJECT_DIR$/core/modules/api/models/group/GoodsQrcodeForm.php" />
+      <change beforePath="$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php" afterPath="$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php" />
       <change beforePath="$PROJECT_DIR$/core/modules/mch/models/GoodsForm.php" afterPath="$PROJECT_DIR$/core/modules/mch/models/GoodsForm.php" />
       <change beforePath="$PROJECT_DIR$/core/modules/mch/views/goods/goods-edit.php" afterPath="$PROJECT_DIR$/core/modules/mch/views/goods/goods-edit.php" />
     </list>
@@ -39,31 +42,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/modules/api/models/LoginForm.php">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="59" column="29" lean-forward="false" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
+            <state relative-caret-position="160">
+              <caret line="30" column="39" lean-forward="false" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoodsForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/modules/mch/models/GoodsForm.php">
+      <file leaf-file-name="GoodsQrcodeForm.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/modules/api/models/GoodsQrcodeForm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="368">
+              <caret line="86" column="18" lean-forward="false" selection-start-line="86" selection-start-column="10" selection-end-line="86" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/models/User.php">
+      <file leaf-file-name="Grafika.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/vendor/kosinix/grafika/src/Grafika/Grafika.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1239">
-              <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+            <state relative-caret-position="-6629">
+              <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -73,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/core/modules/api/models/OrderPayDataForm.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="564">
-              <caret line="109" column="39" lean-forward="true" selection-start-line="109" selection-start-column="39" selection-end-line="109" selection-end-column="39" />
+              <caret line="109" column="39" lean-forward="false" selection-start-line="109" selection-start-column="39" selection-end-line="109" selection-end-column="39" />
               <folding>
                 <element signature="e#129#160#0#PHP" expanded="true" />
               </folding>
@@ -81,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sms.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sms.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/extensions/Sms.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="61" column="19" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+            <state relative-caret-position="779">
+              <caret line="54" column="33" lean-forward="false" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
               <folding>
                 <element signature="e#4587#4731#0#PHP" expanded="false" />
                 <element signature="e#4639#4720#0#PHP" expanded="false" />
@@ -105,24 +108,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods-edit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/modules/mch/views/goods/goods-edit.php">
+      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/group/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="356" column="48" lean-forward="true" selection-start-line="356" selection-start-column="48" selection-end-line="356" selection-end-column="48" />
-              <folding>
-                <marker date="1524734390551" expanded="true" signature="76778:76785" ph="×" />
-                <marker date="1524734390551" expanded="true" signature="76829:76836" ph="×" />
-              </folding>
+            <state relative-caret-position="441">
+              <caret line="142" column="33" lean-forward="true" selection-start-line="142" selection-start-column="33" selection-end-line="142" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/modules/api/models/Model.php">
+      <file leaf-file-name="GoodsQrcodeForm.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/modules/api/models/group/GoodsQrcodeForm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="20" column="85" lean-forward="false" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="85" />
+            <state relative-caret-position="361">
+              <caret line="129" column="18" lean-forward="true" selection-start-line="129" selection-start-column="18" selection-end-line="129" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/group/OrderController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderSubmitForm.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -138,34 +158,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WechatTplMsgSender.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/models/WechatTplMsgSender.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="38" column="20" lean-forward="false" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Wechat.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/vendor/luweiss/wechat/src/Wechat.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="164" column="13" lean-forward="false" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>address</find>
-      <find>下单</find>
-      <find>门店地址</find>
-      <find>clec</find>
       <find>editor</find>
       <find>parameter</find>
       <find>ue</find>
@@ -192,6 +188,10 @@
       <find>json_decode</find>
       <find>$access_token</find>
       <find>getWechat</find>
+      <find>qrcode</find>
+      <find>qr</find>
+      <find>createBlankImage</find>
+      <find>submit</find>
     </findStrings>
     <replaceStrings>
       <replace>name=&quot;model[time]&quot;</replace>
@@ -204,8 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/core/models/JiFenOrder.php" />
-        <option value="$PROJECT_DIR$/core/modules/api/models/JifenOrderPayDataForm.php" />
         <option value="$PROJECT_DIR$/core/modules/api/models/JiFenOrderSubmitForm.php" />
         <option value="$PROJECT_DIR$/core/modules/api/controllers/JifenController.php" />
         <option value="$PROJECT_DIR$/core/modules/mch/views/user/jifen-edit.php" />
@@ -240,7 +238,6 @@
         <option value="$PROJECT_DIR$/core/modules/mch/models/group/PtCatForm.php" />
         <option value="$PROJECT_DIR$/core/modules/api/models/group/PtGoodsForm.php" />
         <option value="$PROJECT_DIR$/core/models/PtOrder.php" />
-        <option value="$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php" />
         <option value="$PROJECT_DIR$/core/modules/mch/views/store/navbar.php" />
         <option value="$PROJECT_DIR$/core/modules/mch/models/group/PtGoodsForm.php" />
         <option value="$PROJECT_DIR$/core/modules/api/models/GoodsAreaListForm.php" />
@@ -255,6 +252,9 @@
         <option value="$PROJECT_DIR$/core/controllers/PayNotifyController.php" />
         <option value="$PROJECT_DIR$/core/modules/api/models/OrderPayDataForm.php" />
         <option value="$PROJECT_DIR$/core/extensions/Sms.php" />
+        <option value="$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php" />
+        <option value="$PROJECT_DIR$/core/modules/api/models/GoodsQrcodeForm.php" />
+        <option value="$PROJECT_DIR$/core/modules/api/models/group/GoodsQrcodeForm.php" />
       </list>
     </option>
   </component>
@@ -266,10 +266,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="x" value="409" />
+    <option name="y" value="100" />
+    <option name="width" value="1645" />
+    <option name="height" value="916" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -388,32 +388,24 @@
               <item name="zjhj_mall" type="cbb8eebc:String" user="zjhj_mall" />
               <item name="core" type="cbb8eebc:String" user="core" />
               <item name="modules" type="cbb8eebc:String" user="modules" />
-              <item name="mch" type="cbb8eebc:String" user="mch" />
+              <item name="api" type="cbb8eebc:String" user="api" />
             </path>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="zjhj_mall" type="cbb8eebc:String" user="zjhj_mall" />
               <item name="core" type="cbb8eebc:String" user="core" />
               <item name="modules" type="cbb8eebc:String" user="modules" />
-              <item name="mch" type="cbb8eebc:String" user="mch" />
-              <item name="models" type="cbb8eebc:String" user="models" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="controllers" type="cbb8eebc:String" user="controllers" />
             </path>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="zjhj_mall" type="cbb8eebc:String" user="zjhj_mall" />
               <item name="core" type="cbb8eebc:String" user="core" />
               <item name="modules" type="cbb8eebc:String" user="modules" />
-              <item name="mch" type="cbb8eebc:String" user="mch" />
-              <item name="views" type="cbb8eebc:String" user="views" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="zjhj_mall" type="cbb8eebc:String" user="zjhj_mall" />
-              <item name="core" type="cbb8eebc:String" user="core" />
-              <item name="modules" type="cbb8eebc:String" user="modules" />
-              <item name="mch" type="cbb8eebc:String" user="mch" />
-              <item name="views" type="cbb8eebc:String" user="views" />
-              <item name="goods" type="cbb8eebc:String" user="goods" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="controllers" type="cbb8eebc:String" user="controllers" />
+              <item name="group" type="cbb8eebc:String" user="group" />
             </path>
           </expand>
           <select />
@@ -494,12 +486,12 @@
       <workItem from="1524464326886" duration="872000" />
       <workItem from="1524472907370" duration="878000" />
       <workItem from="1524552436688" duration="728000" />
-      <workItem from="1524630042116" duration="29629000" />
+      <workItem from="1524630042116" duration="35102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="268363000" />
+    <option name="totallyTimeSpent" value="273836000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -516,10 +508,10 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938644" sideWeight="0.5053305" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13347685" sideWeight="0.4936034" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1108719" sideWeight="0.4936034" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938644" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12378902" sideWeight="0.4946695" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2169448" sideWeight="0.4946695" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1652452" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -548,66 +540,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/models/PtCat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/mch/models/group/PtCatForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/mch/controllers/group/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/group/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="115" column="41" lean-forward="false" selection-start-line="115" selection-start-column="41" selection-end-line="115" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/models/PtGoods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="47" column="6" lean-forward="false" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/api/models/group/PtGoodsForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="176" column="23" lean-forward="false" selection-start-line="176" selection-start-column="23" selection-end-line="176" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/group/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="60" column="31" lean-forward="false" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/models/PtOrder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="73" column="42" lean-forward="false" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="38" column="20" lean-forward="false" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -808,14 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="53" column="31" lean-forward="false" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/vendor/yiisoft/yii2/base/Security.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -845,7 +773,7 @@
         <state relative-caret-position="266">
           <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="32" />
           <folding>
-            <element signature="e#121#154#0#PHP" expanded="true" />
+            <element signature="e#121#154#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -917,7 +845,7 @@
     <entry file="file://$PROJECT_DIR$/core/modules/mch/views/goods/goods-edit.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="356" column="48" lean-forward="true" selection-start-line="356" selection-start-column="48" selection-end-line="356" selection-end-column="48" />
+          <caret line="356" column="48" lean-forward="false" selection-start-line="356" selection-start-column="48" selection-end-line="356" selection-end-column="48" />
           <folding>
             <marker date="1524734390551" expanded="true" signature="76778:76785" ph="×" />
             <marker date="1524734390551" expanded="true" signature="76829:76836" ph="×" />
@@ -936,7 +864,7 @@
     <entry file="file://$PROJECT_DIR$/core/modules/api/models/OrderPayDataForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="564">
-          <caret line="109" column="39" lean-forward="true" selection-start-line="109" selection-start-column="39" selection-end-line="109" selection-end-column="39" />
+          <caret line="109" column="39" lean-forward="false" selection-start-line="109" selection-start-column="39" selection-end-line="109" selection-end-column="39" />
           <folding>
             <element signature="e#129#160#0#PHP" expanded="true" />
           </folding>
@@ -945,8 +873,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/extensions/Sms.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="61" column="19" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+        <state relative-caret-position="779">
+          <caret line="54" column="33" lean-forward="false" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
           <folding>
             <element signature="e#4587#4731#0#PHP" expanded="false" />
             <element signature="e#4639#4720#0#PHP" expanded="false" />
@@ -962,6 +890,78 @@
             <element signature="e#6769#6904#0#PHP" expanded="false" />
             <element signature="e#6795#6893#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/modules/api/models/group/OrderSubmitForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="30" column="39" lean-forward="false" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/extensions/GrafikaHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/vendor/kosinix/grafika/src/Grafika/Grafika.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6629">
+          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/vendor/kosinix/grafika/src/Grafika/EditorInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="209" column="7" lean-forward="true" selection-start-line="209" selection-start-column="7" selection-end-line="209" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/group/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="142" column="33" lean-forward="true" selection-start-line="142" selection-start-column="33" selection-end-line="142" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/modules/api/controllers/group/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/modules/api/models/group/GoodsQrcodeForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="129" column="18" lean-forward="true" selection-start-line="129" selection-start-column="18" selection-end-line="129" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/modules/api/models/GoodsQrcodeForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="86" column="18" lean-forward="false" selection-start-line="86" selection-start-column="10" selection-end-line="86" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

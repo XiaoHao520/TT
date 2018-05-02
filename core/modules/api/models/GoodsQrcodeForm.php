@@ -85,26 +85,28 @@ class GoodsQrcodeForm extends Model
         $name_size = 30;
         $name_width = 670;
         //商品名称处理换行
-        $name = $this->autowrap($name_size, 0, $font_path, $goods->name, $name_width, 2);
+        $name = $this->autowrap($name_size, 0, $font_path, $goods->name, $name_width, 1);
         //加商品名称
-        $editor->text($goods_qrcode, $name, $name_size, 40, 750, new Color('#333333'), $font_path, 0);
+        $editor->text($goods_qrcode, $name, $name_size, 40, 450, new Color('#333333'), $font_path, 0);
 
         //裁剪商品图片
         //$editor->crop($goods_pic, 670, 670, 'smart');
-        $editor->resizeFill($goods_pic, 670, 670);
+        $editor->resizeFill($goods_pic, 670, 370);
+
+
         //附加商品图片
         $editor->blend($goods_qrcode, $goods_pic, 'normal', 1.0, 'top-left', 40, 40);
 
         //加商品价格
-        $editor->text($goods_qrcode, '￥' . $goods->price, 45, 30, 910, new Color('#ff4544'), $font_path, 0);
+        $editor->text($goods_qrcode, '￥' . $goods->price, 45, 30, 500, new Color('#ff4544'), $font_path, 0);
 
         //加商城名称
-        $editor->text($goods_qrcode, $store->name, 20, 40, 1170, new Color('#888888'), $font_path, 0);
+        $editor->text($goods_qrcode, $store->name, $name_size, 40, 670, new Color('#333333'), $font_path, 0);
 
         //调整小程序码图片
         $editor->resizeExactWidth($wxapp_qrcode, 240);
         //附加小程序码图片
-        $editor->blend($goods_qrcode, $wxapp_qrcode, 'normal', 1.0, 'top-left', 470, 1040);
+        $editor->blend($goods_qrcode, $wxapp_qrcode, 'normal', 1.0, 'top-left', 470, 640);
 
         //保存图片
         $editor->save($goods_qrcode, $goods_pic_save_path . $goods_pic_save_name, 'jpeg', 85);
