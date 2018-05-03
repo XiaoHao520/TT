@@ -50,6 +50,7 @@ class GroupForm extends Model
                 'msg'   => '订单不存在请重试1',
             ];
         }
+        $date_time=$order->time;
         if ($order->parent_id == 0){
             $pid = $order->id;
         }else{
@@ -60,8 +61,9 @@ class GroupForm extends Model
             'order_id'  => $pid,
             'is_delete' => 0
         ]);
-
-        $goods = PtGoods::findOne([
+        $order_attr=$OrderDetail->attr;
+        $total_price=$OrderDetail->total_price;
+      $goods = PtGoods::findOne([
             'id'        => $OrderDetail->goods_id,
             'status'    => 1,
             'is_delete' => 0,
@@ -77,7 +79,7 @@ class GroupForm extends Model
             'id'  => $goods->id,
             'name'  => $goods->name,
             'original_price'    => $goods->original_price,
-            'price'             => $goods->price,
+            'price'             => $total_price,
             'cover_pic'         => $goods->cover_pic,
             'group_num'         => $goods->group_num,
             'type'              => $goods->type,
@@ -172,6 +174,8 @@ class GroupForm extends Model
                     'inGroup' => $inGroup,
                     'attr_group_list'=>$attr_group_list,
                     'groupRuleId'=>$groupRuleId,
+                    'order_attr'=>json_decode($order_attr),
+                    'date_time'=>$date_time
                 ],
             ];
         }else{

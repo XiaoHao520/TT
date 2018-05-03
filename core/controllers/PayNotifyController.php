@@ -95,14 +95,10 @@ class PayNotifyController extends Controller
             //$this->setReturnData($order);
             $this->paySendCoupon($order->store_id, $order->user_id);
             $this->autoBecomeShare($order->user_id, $order->store_id);
-
-
-            $wechat_tpl_meg_sender = new WechatTplMsgSender($order->store_id, $order->id, $wechat);
-            $wechat_tpl_meg_sender->payMsg();
+            $wechat_tpl_msg_sender = new WechatTplMsgSender($order->store_id, $order->id, $wechat);
+            $wechat_tpl_msg_sender->payMsg();
             Sms::send($order->store_id, $order->order_no,$order);
-
             OrderMessage::set($order->id, $order->store_id);
-
             $this->paySendCard($order->store_id, $order->user_id,$order->id);
             $printer_setting = PrinterSetting::findOne(['store_id'=>$order->store_id,'is_delete'=>0]);
             $type = json_decode($printer_setting->type,true);
@@ -267,7 +263,8 @@ class PayNotifyController extends Controller
                 $notice = new PtNoticeSender($wechat, $order->store_id);
                 $notice->sendSuccessNotice($order->id);
             }
-            Sms::send($order->store_id, $order->order_no);
+
+           // Sms::send($order->store_id, $order->order_no);
             $mail = new SendMail($order->store_id,$order->id,1);
             $mail->send();
 

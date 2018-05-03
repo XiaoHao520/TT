@@ -108,7 +108,7 @@ class GoodsQrcodeForm extends Model
         $editor->text($goods_qrcode, '分享给你一个商品', 15, (132 + $namewitch[2]), 66, new Color('#353535'), $font_path, 0);
 
         //裁剪商品图片
-        $editor->resizeFill($goods_pic, 690, 390);
+        $editor->resizeFill($goods_pic, 690, 370);
         //附加商品图片
         $editor->blend($goods_qrcode, $goods_pic, 'normal', 1.0, 'top-left', 30, 126);
 

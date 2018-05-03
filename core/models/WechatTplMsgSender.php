@@ -67,8 +67,6 @@ class WechatTplMsgSender
                 $goods_names .= $goods['name'];
             }
 
-
-
             $data = [
           'touser' => $this->user->wechat_open_id,
                 'template_id' => $this->wechat_template_message->pay_tpl,
@@ -249,7 +247,5 @@ class WechatTplMsgSender
         if (!empty($res['errcode']) && $res['errcode'] != 0) {
             \Yii::warning("模板消息发送失败：\r\ndata=>{$data}\r\nresponse=>" . json_encode($res, JSON_UNESCAPED_UNICODE));
         }
-
-
     }
 }

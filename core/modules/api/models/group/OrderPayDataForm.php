@@ -13,6 +13,7 @@ use app\models\FormId;
 use app\models\Goods;
 use app\models\OrderDetail;
 use app\models\PtGoods;
+use app\models\PtNoticeSender;
 use app\models\PtOrder;
 use app\models\PtOrderDetail;
 use app\models\Setting;
@@ -89,12 +90,17 @@ class OrderPayDataForm extends Model
                 'signType' => 'MD5',
             ];
             $pay_data['paySign'] = $this->wechat->pay->makeSign($pay_data);
+            $pt_notice=new PtNoticeSender($this->wechat,$this->store_id);
+            $res_data= $pt_notice->sendOrderPayNotice($this->order_id);
+
+          //  $res_data= $pt_notice->sendSuccessNotice($this->order_id);
             return [
                 'code' => 0,
                 'msg' => 'success',
                 'data' => (object)$pay_data,
                 'res' => $res,
                 'body' => $goods_names,
+                'res_data'=>$res_data
             ];
         }
     }

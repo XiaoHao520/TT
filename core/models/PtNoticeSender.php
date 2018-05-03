@@ -42,10 +42,16 @@ class PtNoticeSender
      */
     public function sendSuccessNotice($order_id)
     {
-        $tpl_id = Option::get('pintuan_success_notice', $this->store_id);
+//        $tpl_id = Option::get('pintuan_success_notice', $this->store_id);
+
+
+
+        $tpl_id = $this->wechat_template_message->pay_tpl;
+
+
         if (!$tpl_id) {
             \Yii::warning('模板消息发送失败，模板消息ID未配置');
-            return false;
+            return '模板id';
         }
         $order = PtOrder::find()->alias('po')
             ->select('po.*,u.wechat_open_id,u.nickname,pg.name AS goods_name,fi.form_id')
@@ -57,10 +63,10 @@ class PtNoticeSender
                 'AND',
                 [
                     'po.id' => $order_id,
-                    'po.is_pay' => 1,
+                  /*  'po.is_pay' => 1,
                     'po.is_delete' => 0,
                     'po.status' => 3,
-                    'po.is_success' => 1,
+                    'po.is_success' => 1,*/
                 ],
                 ['IS NOT', 'pod.id', null],
             ])
@@ -69,7 +75,7 @@ class PtNoticeSender
             ->one();
         if (!$order) {
             \Yii::warning('模板消息发送失败，订单不存在');
-            return false;
+            return '订单不存在1';
         }
         if ($order['parent_id'] != 0) {
             $order = PtOrder::find()->alias('po')
@@ -94,7 +100,7 @@ class PtNoticeSender
                 ->one();
             if (!$order) {
                 \Yii::warning('模板消息发送失败，订单不存在');
-                return false;
+                return '订单不存在2';
             }
         }
         $sub_order_list = PtOrder::find()->alias('po')
@@ -380,7 +386,9 @@ class PtNoticeSender
         $this->wechat->curl->post($api, $data);
         $res = json_decode($this->wechat->curl->response, true);
         if (!empty($res['errcode']) && $res['errcode'] != 0) {
-            \Yii::warning("模板消息发送失败：\r\ndata=>{$data}\r\nresponse=>" . json_encode($res, JSON_UNESCAPED_UNICODE));
+
+          return  "模板消息发送失败：\r\ndata=>{$data}\r\nresponse=>" . json_encode($res, JSON_UNESCAPED_UNICODE);
+        //     \Yii::warning("模板消息发送失败：\r\ndata=>{$data}\r\nresponse=>" . json_encode($res, JSON_UNESCAPED_UNICODE));
         }
     }
 
@@ -396,4 +404,76 @@ class PtNoticeSender
             return false;
         return json_decode($curl->response, true);
     }
+
+
+
+    public function sendOrderPayNotice($order_id)
+    {
+
+        $order = PtOrder::find()->alias('po')
+            ->select('po.*,u.wechat_open_id,u.nickname,pg.name AS goods_name,fi.form_id')
+            ->leftJoin(['u' => User::tableName()], 'po.user_id=u.id')
+            ->leftJoin(['pod' => PtOrderDetail::find()->where(['is_delete' => 0])->orderBy('addtime DESC')], 'po.id=pod.order_id')
+            ->leftJoin(['pg' => PtGoods::tableName()], 'pod.goods_id=pg.id')
+            ->leftJoin(['fi' => FormId::find()->orderBy('id DESC')], 'po.order_no=fi.order_no')
+            ->where([
+                'AND',
+                [
+                    'po.id' => $order_id,
+                ],
+                ['IS NOT', 'pod.id', null],
+            ])
+            ->limit(1)
+            ->asArray()
+            ->one();
+
+        try {
+            if (!$this->wechat_template_message->pay_tpl)
+                return;
+            $goods_list = PtOrderDetail::find()
+                ->select('g.name,od.num')
+                ->alias('od')->leftJoin(['g' => PtGoods::tableName()], 'od.goods_id=g.id')
+                ->where(['od.order_id' => $this->order->id, 'od.is_delete' => 0])->asArray()->all();
+            $goods_names = '';
+            foreach ($goods_list as $goods) {
+                $goods_names .= $goods['name'];
+            }
+
+            $data = [
+                'touser' => $order['wechat_open_id'],
+                'template_id' => $this->wechat_template_message->pay_tpl,
+                'form_id' => $order['form_id'],
+                'page' => 'pages/order/order?status=1',
+                'data' => [
+                    'keyword1' => [
+                        'value' => $this->order->order_no,
+                        'color' => '#333333',
+                    ],
+                    'keyword2' => [
+                        'value' => $this->order->mobile,
+                        'color' => '#333333',
+                    ],
+                    'keyword3' => [
+                        'value' => $this->order->pay_price,
+                        'color' => '#333333',
+                    ],
+                    'keyword5' => [
+                        'value' => date('Y-m-d H:i:s', $this->order->pay_time),
+                        'color' => '#333333',
+                    ],
+
+                    'keyword4' => [
+                        'value' => $goods_names,
+                        'color' => '#333333',
+                    ],
+                ],
+            ];
+
+          return  $this->sendTplMsg($data);
+        } catch (\Exception $e) {
+            \Yii::warning($e->getMessage());
+        }
+
+    }
+
 }
