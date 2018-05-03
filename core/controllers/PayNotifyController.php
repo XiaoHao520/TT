@@ -96,7 +96,10 @@ class PayNotifyController extends Controller
             $this->paySendCoupon($order->store_id, $order->user_id);
             $this->autoBecomeShare($order->user_id, $order->store_id);
             $wechat_tpl_msg_sender = new WechatTplMsgSender($order->store_id, $order->id, $wechat);
+
+            //$wechat_tpl_msg_sender = new WechatTplMsgSender($order->store_id, $order->id, $wechat);
             $wechat_tpl_msg_sender->payMsg();
+
             Sms::send($order->store_id, $order->order_no,$order);
             OrderMessage::set($order->id, $order->store_id);
             $this->paySendCard($order->store_id, $order->user_id,$order->id);

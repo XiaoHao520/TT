@@ -97,8 +97,8 @@ class OrderPayDataForm extends Model
             $pay_data['paySign'] = $this->wechat->pay->makeSign($pay_data);
             /*******************************正常付款***************************************/
 
-                $tplMsg=new WechatTplMsgSender($this->store_id,$this->order_id,$this->wechat);
-                $tplMsg->payMsg();
+               // $tplMsg=new WechatTplMsgSender($this->store_id,$this->order_id,$this->wechat);
+              //  $tplMsg->payMsg();
             //发送短信提醒
            // $order = Order::findOne(['id'=>$this->order_id,'store_id'=>$this->store_id]);
          //  $sms= Sms::send($order->store_id, $order->order_no,$order);

@@ -42,11 +42,9 @@ class PtNoticeSender
      */
     public function sendSuccessNotice($order_id)
     {
-//        $tpl_id = Option::get('pintuan_success_notice', $this->store_id);
+        $tpl_id = Option::get('pintuan_success_notice', $this->store_id);
 
-
-
-        $tpl_id = $this->wechat_template_message->pay_tpl;
+      //  $tpl_id = $this->wechat_template_message->pay_tpl;
 
 
         if (!$tpl_id) {
@@ -63,10 +61,10 @@ class PtNoticeSender
                 'AND',
                 [
                     'po.id' => $order_id,
-                  /*  'po.is_pay' => 1,
+                    'po.is_pay' => 1,
                     'po.is_delete' => 0,
                     'po.status' => 3,
-                    'po.is_success' => 1,*/
+                    'po.is_success' => 1,
                 ],
                 ['IS NOT', 'pod.id', null],
             ])
