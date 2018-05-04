@@ -44,6 +44,7 @@ use Yii;
  * @property double $latitude
  * @property double $longitude
  * @property String $time
+ * @property String $notice
  */
 class PtGoods extends \yii\db\ActiveRecord
 {
@@ -62,10 +63,10 @@ class PtGoods extends \yii\db\ActiveRecord
     {
         return [
             [['store_id', 'name', 'original_price', 'price', 'attr','time'], 'required'],
-            [['store_id', 'cat_id', 'status', 'grouptime', 'sort', 'virtual_sales', 'weight', 'freight', 'addtime', 'is_delete', 'group_num', 'is_hot', 'limit_time', 'is_only', 'is_more', 'buy_limit', 'type', 'use_attr','dock_id','capacity'], 'integer'],
+            [['store_id', 'cat_id', 'status', 'grouptime', 'sort', 'virtual_sales', 'weight', 'freight', 'addtime', 'is_delete', 'group_num', 'is_hot', 'limit_time', 'is_only', 'is_more', 'buy_limit', 'type', 'use_attr','dock_id'], 'integer'],
             [['original_price', 'price', 'colonel','latitude','longitude','timelong'], 'number'],
-            [['detail', 'attr', 'cover_pic','address','dock','parameter'], 'string'],
-            [['name', 'unit','timelong'], 'string', 'max' => 255],
+            [['detail', 'attr', 'cover_pic','address','dock','parameter','notice'], 'string'],
+            [['name', 'unit','timelong','capacity'], 'string', 'max' => 255],
             [['service'], 'string', 'max' => 2000],
         ];
     }
@@ -104,7 +105,8 @@ class PtGoods extends \yii\db\ActiveRecord
             'buy_limit' => '限购数量',
             'type' => '商品类型【1=> 送货上门，2=> 到店自提，3=> 全部支持】',
             'use_attr' => '是否使用规格：0=不使用，1=使用',
-            'address'=>'地址'
+            'address'=>'地址',
+            'notice'=>'通知接收者'
         ];
     }
 

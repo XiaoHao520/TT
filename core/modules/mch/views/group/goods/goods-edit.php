@@ -367,7 +367,15 @@ if (!$returnUrl)
                                    value="<?= $goods['timelong'] ?>">
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        <div class="col-3 text-right">
+                            <label class=" col-form-label">接收通知短信的电话</label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control short-row" type="text" name="model[notice]"
+                                   value="<?= $goods['notice'] ?>">
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-3 text-right">
                             <label class=" col-form-label">开船时间</label>

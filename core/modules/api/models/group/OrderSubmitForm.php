@@ -11,6 +11,7 @@ namespace app\modules\api\models\group;
 
 use app\extensions\PinterOrder;
 use app\extensions\printerPtOrder;
+use app\extensions\Sms;
 use app\models\Address;
 use app\models\Attr;
 use app\models\AttrGroup;
@@ -269,9 +270,13 @@ class OrderSubmitForm extends Model
                 $res = $printer_order->print_order();
             }
             $t->commit();
+
+
+            // $res=  Sms::ptsend($order->store_id,$order->id);
             return [
                 'code' => 0,
                 'msg' => '订单提交成功',
+               // 'res'=>$res,
                 'data' => (object)[
                     'order_id' => $order->id,
                 ],

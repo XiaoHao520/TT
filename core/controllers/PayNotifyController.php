@@ -208,6 +208,10 @@ class PayNotifyController extends Controller
             return;
         }
 
+
+
+
+
 //        if ($order->getSurplusGruop())
 
         $order->is_pay = 1;
@@ -246,6 +250,13 @@ class PayNotifyController extends Controller
         }
 
         if ($order->save()) {
+
+            $notice2 = new PtNoticeSender($wechat, $order->store_id);
+
+            $notice2->sendOrderPayNotice($order->id);
+
+
+
             $printer_setting = PrinterSetting::findOne(['store_id' => $order->store_id, 'is_delete' => 0]);
             $type = json_decode($printer_setting->type, true);
             if ($type['pay'] && $type['pay'] == 1) {
@@ -265,7 +276,11 @@ class PayNotifyController extends Controller
                 }
                 $notice = new PtNoticeSender($wechat, $order->store_id);
                 $notice->sendSuccessNotice($order->id);
+                Sms::ptsend($order->store_id,$order->id);
             }
+
+
+
 
            // Sms::send($order->store_id, $order->order_no);
             $mail = new SendMail($order->store_id,$order->id,1);

@@ -9,6 +9,7 @@
 namespace app\models;
 
 
+use app\extensions\Sms;
 use luweiss\wechat\Wechat;
 use yii\helpers\VarDumper;
 
@@ -161,6 +162,8 @@ class PtNoticeSender
                 ],
             ];
             $res = $this->sendNotice(json_encode($data, JSON_UNESCAPED_UNICODE));
+
+
             if ($res == false) {
                 \Yii::warning("拼团订单(id={$order['id']})发送消息失败，网络错误");
                 continue;
@@ -169,6 +172,8 @@ class PtNoticeSender
                 \Yii::warning("拼团订单(id={$order['id']})发送消息失败，" . (isset($res['errmsg']) ? $res['errmsg'] : null));
                 continue;
             }
+
+
         }
         return true;
     }
@@ -409,7 +414,7 @@ class PtNoticeSender
     {
 
         $order = PtOrder::find()->alias('po')
-            ->select('po.*,u.wechat_open_id,u.nickname,pg.name AS goods_name,fi.form_id')
+            ->select('po.*,u.wechat_open_id,u.nickname,pg.name AS goods_name,fi.form_id,pod.total_price')
             ->leftJoin(['u' => User::tableName()], 'po.user_id=u.id')
             ->leftJoin(['pod' => PtOrderDetail::find()->where(['is_delete' => 0])->orderBy('addtime DESC')], 'po.id=pod.order_id')
             ->leftJoin(['pg' => PtGoods::tableName()], 'pod.goods_id=pg.id')
@@ -431,7 +436,7 @@ class PtNoticeSender
             $goods_list = PtOrderDetail::find()
                 ->select('g.name,od.num')
                 ->alias('od')->leftJoin(['g' => PtGoods::tableName()], 'od.goods_id=g.id')
-                ->where(['od.order_id' => $this->order->id, 'od.is_delete' => 0])->asArray()->all();
+                ->where(['od.order_id' => $order_id, 'od.is_delete' => 0])->asArray()->all();
             $goods_names = '';
             foreach ($goods_list as $goods) {
                 $goods_names .= $goods['name'];
@@ -444,19 +449,19 @@ class PtNoticeSender
                 'page' => 'pages/order/order?status=1',
                 'data' => [
                     'keyword1' => [
-                        'value' => $this->order->order_no,
+                        'value' => $order['order_no'],
                         'color' => '#333333',
                     ],
                     'keyword2' => [
-                        'value' => $this->order->mobile,
+                        'value' =>  $order['mobile'],
                         'color' => '#333333',
                     ],
                     'keyword3' => [
-                        'value' => $this->order->pay_price,
+                        'value' => $order['total_price'],
                         'color' => '#333333',
                     ],
                     'keyword5' => [
-                        'value' => date('Y-m-d H:i:s', $this->order->pay_time),
+                        'value' => date('Y-m-d H:i:s', $order['addtime']),
                         'color' => '#333333',
                     ],
 

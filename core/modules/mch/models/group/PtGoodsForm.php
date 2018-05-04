@@ -55,7 +55,7 @@ class PtGoodsForm extends Model
     public $dock;
     public $parameter;
     public $dock_id;
-
+    public $notice;
 
     /**
      * @inheritdoc
@@ -63,15 +63,15 @@ class PtGoodsForm extends Model
     public function rules()
     {
         return [
-            [['store_id', 'name', 'original_price', 'price', 'detail', 'group_num', 'grouptime', 'cat_id','address','time','capacity','dock','dock_id'], 'required'],
+            [['store_id', 'name', 'original_price', 'price', 'detail', 'group_num', 'grouptime', 'cat_id', 'address', 'time', 'capacity', 'dock', 'dock_id'], 'required'],
             [['store_id', 'cat_id', 'grouptime', 'sort', 'virtual_sales', 'weight', 'freight', 'group_num', 'limit_time', 'is_only', 'is_more', 'buy_limit', 'type', 'use_attr'], 'integer'],
             [['original_price', 'price', 'colonel'], 'number'],
-            [['detail', 'cover_pic','parameter','time','capacity'], 'string'],
-            [['attr','goods_pic_list',], 'safe',],
-            [['name', 'unit','address','timelong',], 'string', 'max' => 255],
+            [['detail', 'cover_pic', 'parameter', 'time', 'capacity','notice'], 'string'],
+            [['attr', 'goods_pic_list',], 'safe',],
+            [['name', 'unit', 'address', 'timelong',], 'string', 'max' => 255],
             [['service'], 'string', 'max' => 2000],
-            [['goods_num','dock_id'], 'integer', 'min' => 0,],
-            [['longitude', 'latitude'],'double','min'=>0],
+            [['goods_num', 'dock_id'], 'integer', 'min' => 0,],
+            [['longitude', 'latitude'], 'double', 'min' => 0],
         ];
     }
 
@@ -110,12 +110,13 @@ class PtGoodsForm extends Model
             'type' => '商品支持送货类型',
             'use_attr' => '是否使用规则',
             'goods_num' => '商品库存',
-            'address'=>'位置',
-            'dock'=>'码头',
-            'dock_id'=>'码头id',
-            'parameter'=>'参数',
-            'time'=>'时间段',
-            'dock_id'=>'请选择码头'
+            'address' => '位置',
+            'dock' => '码头',
+            'dock_id' => '码头id',
+            'parameter' => '参数',
+            'time' => '时间段',
+            'dock_id' => '请选择码头',
+            'notice'=>'短信通知接收者'
         ];
     }
 
@@ -132,8 +133,8 @@ class PtGoodsForm extends Model
             ->select(['g.*', 'c.name AS cname'])
             ->leftJoin('{{%pt_cat}} c', 'g.cat_id=c.id');
         $cat = \Yii::$app->request->get('cat');
-        if ($cat){
-            $query->andWhere(['cat_id'=>$cat]);
+        if ($cat) {
+            $query->andWhere(['cat_id' => $cat]);
         }
         $keyword = \Yii::$app->request->get('keyword');
         if (trim($keyword)) {
@@ -152,7 +153,7 @@ class PtGoodsForm extends Model
             ->asArray()
             ->limit($p->limit)
             ->all();
-        foreach ($list AS $key => $goods){
+        foreach ($list AS $key => $goods) {
             $list[$key]['num'] = PtGoods::getNum($goods['id']);
         }
         return [$list, $p];
@@ -187,9 +188,6 @@ class PtGoodsForm extends Model
             $goods = $this->goods;
 
 
-
-
-
             if ($goods->isNewRecord) {
                 $goods->is_delete = 0;
                 $goods->is_hot = 0;
@@ -197,11 +195,6 @@ class PtGoodsForm extends Model
                 $goods->status = 2;
                 $goods->attr = json_encode([], JSON_UNESCAPED_UNICODE);
             }
-
-
-
-
-
 
 
 //            $this->full_cut = json_encode($this->full_cut,JSON_UNESCAPED_UNICODE);
@@ -216,11 +209,11 @@ class PtGoodsForm extends Model
             unset($_this_attributes['attr']);
             $goods->attributes = $_this_attributes;
             $goods->use_attr = $this->use_attr ? 1 : 0;
-            $dock=Dock::findOne(['id'=>$this->dock_id]);
+            $dock = Dock::findOne(['id' => $this->dock_id]);
 
-            $goods->dock=$dock->name;
-            $goods->dock_id=$this->dock_id;
-            $goods->address=$dock->address;
+            $goods->dock = $dock->name;
+            $goods->dock_id = $this->dock_id;
+            $goods->address = $dock->address;
             if ($goods->save()) {
                 PtGoodsPic::updateAll(['is_delete' => 1], ['goods_id' => $goods->id]);
                 foreach ($this->goods_pic_list as $pic_url) {
