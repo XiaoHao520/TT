@@ -179,11 +179,11 @@ if ($status === '' || $status === null || $status == -1)
                 </li>
                 <li class="nav-item">
                     <a class="status-item nav-link <?= $status == 1 ? 'active' : null ?>"
-                       href="<?= $urlManager->createUrl(array_merge(['mch/group/order/index'], $condition, ['status' => 1])) ?>">待发货<?= $store_data['status_count']['status_1'] ? '(' . $store_data['status_count']['status_1'] . ')' : null ?></a>
+                       href="<?= $urlManager->createUrl(array_merge(['mch/group/order/index'], $condition, ['status' => 1])) ?>">待确认<?= $store_data['status_count']['status_1'] ? '(' . $store_data['status_count']['status_1'] . ')' : null ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="status-item nav-link <?= $status == 2 ? 'active' : null ?>"
-                       href="<?= $urlManager->createUrl(array_merge(['mch/group/order/index'], $condition, ['status' => 2])) ?>">已发货<?= $store_data['status_count']['status_2'] ? '(' . $store_data['status_count']['status_2'] . ')' : null ?></a>
+                       href="<?= $urlManager->createUrl(array_merge(['mch/group/order/index'], $condition, ['status' => 2])) ?>">已确认<?= $store_data['status_count']['status_2'] ? '(' . $store_data['status_count']['status_2'] . ')' : null ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="status-item nav-link <?= $status == 6 ? 'active' : null ?>"
@@ -252,8 +252,8 @@ if ($status === '' || $status === null || $status == -1)
                             </div>
                         </td>
                         <td class="order-tab-2">
-                            <div>总金额：<?= $order_item['total_price'] ?>元（含运费）</div>
-                            <div>运费：<?= $order_item['express_price'] ?>元</div>
+                            <div>总金额：<?= $order_item['total_price'] ?>元</div>
+                            <div style="display: none">运费：<?= $order_item['express_price'] ?>元</div>
                             <?php if ($order_item['colonel'] && $order_item['parent_id'] == 0 && $order_item['is_group'] == 1): ?>
                                 <div>团长优惠：<?= $order_item['colonel'] ?>元</div>
                             <?php endif; ?>
@@ -281,7 +281,7 @@ if ($status === '' || $status === null || $status == -1)
                                     --><?php /*endif; */?>
                                 </div>
                             <?php endif; ?>
-                            <div>
+                            <div style="display: none">
                                 发货方式：
                                 <?php if ($order_item['offline'] == 1): ?>
                                     <span class="badge badge-success">送货上门</span>
@@ -291,31 +291,31 @@ if ($status === '' || $status === null || $status == -1)
                             </div>
                             <?php if ($order_item['is_pay'] == 1): ?>
                                 <div>
-                                    发货状态：
+                                    出发状态：
                                     <?php if ($order_item['is_send'] == 1): ?>
-                                        <span class="badge badge-success">已发货</span>
+                                        <span class="badge badge-success">已确认</span>
                                     <?php else: ?>
-                                        <span class="badge badge-default">未发货</span>
+                                        <span class="badge badge-default">未确认</span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
                             <?php if ($order_item['is_send'] == 1): ?>
                                 <div>
-                                    收货状态：
+                                    核销状态：
                                     <?php if ($order_item['is_confirm'] == 1): ?>
-                                        <span class="badge badge-success">已收货</span>
+                                        <span class="badge badge-success">已核销</span>
                                     <?php else: ?>
-                                        <span class="badge badge-default">未收货</span>
+                                        <span class="badge badge-default">未核销</span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
                             <?php if ($order_item['is_send'] == 1): ?>
                                 <?php if ($order_item['is_offline'] == 0 || $order_item['express']): ?>
-                                    <div>快递单号：<a href="https://www.baidu.com/s?wd=<?= $order_item['express_no'] ?>"
+                                    <div style="display: none">快递单号：<a href="https://www.baidu.com/s?wd=<?= $order_item['express_no'] ?>"
                                                  target="_blank"><?= $order_item['express_no'] ?></a></div>
-                                    <div>快递公司：<?= $order_item['express'] ?></div>
+                                    <div style="display: none">快递公司：<?= $order_item['express'] ?></div>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </td>
@@ -334,7 +334,7 @@ if ($status === '' || $status === null || $status == -1)
                             <?php else: ?>
                                 <?php if ($order_item['is_pay'] == 1 && $order_item['is_confirm'] != 1 && $order_item['is_success'] == 1): ?>
                                     <a class="btn btn-sm btn-primary send-btn" href="javascript:"
-                                       data-order-id="<?= $order_item['id'] ?>"><?= ($order_item['is_send'] == 1) ? "修改快递单号" : "发货" ?></a>
+                                       data-order-id="<?= $order_item['id'] ?>"><?= ($order_item['is_send'] == 1) ? "已确认出发时间" : "确认出发时间" ?></a>
                                 <?php endif; ?>
                             <?php endif; ?>
 
@@ -343,13 +343,14 @@ if ($status === '' || $status === null || $status == -1)
                     <tr>
                         <td colspan="5">
                             <div>
-                                <span class="mr-3">收货人：<?= $order_item['name'] ?></span>
+                                <span class="mr-3">联系人：<?= $order_item['name'] ?></span>
                                 <span class="mr-3">电话：<?= $order_item['mobile'] ?></span>
                                 <?php if ($order_item['is_offline'] == 0): ?>
-                                    <span>地址：<?= $order_item['address'] ?></span>
+                                    <span style="display: none">地址：<?= $order_item['address'] ?></span>
                                 <?php endif; ?>
+                                <span>备注：<?= $order_item['content'] ?></span>
                             </div>
-                            <div><span>备注：<?= $order_item['content'] ?></span></div>
+                            <div style="display: none"><span>备注：<?= $order_item['content'] ?></span></div>
                         </td>
                     </tr>
                 </table>
@@ -374,27 +375,32 @@ if ($status === '' || $status === null || $status == -1)
                         <form class="send-form" method="post">
                             <div class="form-group row">
                                 <div class="col-3 text-right">
-                                    <label class=" col-form-label">物流选择</label>
+                                    <label class=" col-form-label">是否确认</label>
                                 </div>
                                 <div class="col-9">
                                     <div class="pt-1">
                                         <label class="custom-control custom-radio">
-                                            <input id="radio1" value="1" checked
+                                            <input id="radio2" value="0" name="is_express" type="radio"
+                                                   class="custom-control-input is-express" checked>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">确认出发时间</span>
+                                        </label>
+                                        <label class="custom-control custom-radio" style="display: none;">
+                                            <input id="radio1" value="1"
                                                    name="is_express" type="radio"
                                                    class="custom-control-input is-express">
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description">快递</span>
                                         </label>
-                                        <label class="custom-control custom-radio">
-                                            <input id="radio2" value="0" name="is_express" type="radio"
-                                                   class="custom-control-input is-express">
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">无需物流</span>
-                                        </label>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="is-true-express">
+                            <div class="mt-2">
+                                <label>商家留言（选填）</label>
+                                <textarea class="form-control" name="words"></textarea>
+                            </div>
+                            <div class="is-true-express" style="display: none">
                                 <input class="form-control" type="hidden" autocomplete="off" name="order_id">
                                 <label>快递公司</label>
                                 <div class="input-group mb-3">
@@ -430,10 +436,7 @@ if ($status === '' || $status === null || $status == -1)
                                        name="express_no">
                                 <div class="text-danger mt-3 form-error" style="display: none"></div>
                             </div>
-                            <div class="mt-2">
-                                <label>商家留言（选填）</label>
-                                <textarea class="form-control" name="words"></textarea>
-                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -484,6 +487,14 @@ if ($status === '' || $status === null || $status == -1)
         btn.btnLoading("正在提交");
         error.hide();
         console.log(error);
+        console.log("***************************");
+
+
+
+
+
+
+
         $.ajax({
             url: "<?=$urlManager->createUrl(['mch/group/order/send'])?>",
             type: "post",

@@ -46,6 +46,7 @@ use yii\helpers\VarDumper;
  * @property double $longitude
  * @property string $time
  * @property string $tpl_user
+ * @property string $sub_title
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -63,10 +64,10 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['store_id', 'name', 'detail', 'attr'], 'required'],
+            [['store_id', 'name', 'detail', 'attr','sub_title'], 'required'],
             [['store_id', 'cat_id', 'status', 'addtime', 'is_delete', 'sort', 'virtual_sales', 'individual_share', 'freight', 'use_attr', 'share_type'], 'integer'],
             [['price', 'original_price', 'share_commission_first', 'share_commission_second', 'share_commission_third', 'weight','latitude','longitude'], 'number'],
-            [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock'], 'string'],
+            [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock','sub_title'], 'string'],
             [['name', 'unit','timelong'], 'string', 'max' => 255],
             [['service','tpl_user'], 'string', 'max' => 2000],
             [['tpl_user'],'default','value'=>0]
@@ -108,7 +109,8 @@ class Goods extends \yii\db\ActiveRecord
             'share_type' => '佣金配比 0--百分比 1--固定金额',
             'timelong'=>'时长',
             'capacity'=>"核载人数",
-            'tpl_user'=>'接收模板消息的用户ID'
+            'tpl_user'=>'接收模板消息的用户ID',
+            'sub_title'=>'商品描述'
         ];
     }
 

@@ -316,6 +316,15 @@ if (!$returnUrl)
                     </div>
                     <div class="form-group row">
                         <div class="col-3 text-right">
+                            <label class=" col-form-label required">商品描述</label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control short-row" type="text" name="model[sub_title]"
+                                   value="<?= $goods['sub_title'] ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3 text-right">
                             <label class=" col-form-label required">所属码头</label>
                         </div>
                         <div class="col-9">
@@ -380,7 +389,7 @@ if (!$returnUrl)
                         </div>
                         <div class="col-9">
                             <input class="form-control short-row" type="text" name="model[unit]"
-                                   value="<?= $goods['unit'] ? $goods['unit'] : '件' ?>">
+                                   value="<?= $goods['unit'] ? $goods['unit'] : '人' ?>">
                         </div>
                     </div>
                     <div class="form-group row">

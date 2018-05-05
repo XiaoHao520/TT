@@ -233,7 +233,22 @@ class PtOrderForm extends Model
 
         foreach ($list as $key => $item){
             $list[$key]['currentNum'] = PtOrder::find()->andWhere(['OR',['id'=>$item['id']],['parent_id'=>$item['id']]])->count();
+
+            $list[$key]['baoxian']=json_decode($list[$key]['baoxian'],true)[0];
         }
+       // var_dump($list[0]['baoxian']);
+      // var_dump($list[0]['baoxian']['tel']);
+      // die();
+
+
+
+
+
+
+         // var_dump($list);
+
+
+
         return [
             'list'      =>  $list,
             'p'         =>  $p,
@@ -277,6 +292,8 @@ class PtOrderForm extends Model
             }else{
                 $list[$key]['nickname'] = PtRobot::find()->andWhere(['id'=>$value['user_id']])->select('name')->scalar();
             }
+
+            $list[$key]['baoxian']=json_decode($list[$key]['baoxian'],true)[0];
         }
         return [
             'list'      =>  $list,

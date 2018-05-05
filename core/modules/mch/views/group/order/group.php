@@ -157,7 +157,7 @@ if ($status === '' || $status === null || $status == -1)
                             <span class="mr-5">团订单ID：<?= $order_item['id'] ?></span>
                             <span>团长：<span
                                 class="badge badge-pill badge-warning"><?= $order_item['nickname'] ?></span></span>
-
+                            <span style="margin-right:10px;margin-left:20px;background-color:red;color:white; padding: 6px 4px;border-radius:7px;">保险信息</span><span style="margin-right: 10px">姓名：<?=$order_item['baoxian']['name']?> </span>   <span style="margin-right: 10px">联系电话：<?=$order_item['baoxian']['tel']?></span>  <span style="margin-right: 10px"> 身份证：<?=$order_item['baoxian']['idCard']?></span>
                         </td>
                     </tr>
                     <tr>

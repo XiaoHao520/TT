@@ -83,7 +83,7 @@ $this->params['active_nav_group'] = 3;
                                 </td>
                             </tr>
                             <?php if ($order['express']): ?>
-                                <tr>
+                                <tr style="display: none"
                                     <td>快递信息</td>
                                     <td>
                                         <div>
@@ -110,24 +110,24 @@ $this->params['active_nav_group'] = 3;
                             </tr>
                             <?php if ($order['is_pay'] == 1): ?>
                                 <tr>
-                                    <td>发货状态</td>
+                                    <td>订单状态</td>
                                     <td>
                                         <?php if ($order['is_send'] == 1): ?>
-                                            <span class="badge badge-success">已发货</span>
+                                            <span class="badge badge-success">已确认出发时间</span>
                                         <?php else: ?>
-                                            <span class="badge badge-default">未发货</span>
+                                            <span class="badge badge-default">未确认出发时间</span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endif; ?>
                             <?php if ($order['is_send'] == 1): ?>
                                 <tr>
-                                    <td>收货状态</td>
+                                    <td>核销状态</td>
                                     <td>
                                         <?php if ($order['is_confirm'] == 1): ?>
-                                            <span class="badge badge-success">已收货</span>
+                                            <span class="badge badge-success">已核销</span>
                                         <?php else: ?>
-                                            <span class="badge badge-default">未收货</span>
+                                            <span class="badge badge-default">未核销</span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -152,10 +152,10 @@ $this->params['active_nav_group'] = 3;
                                 <td colspan="2" style="text-align: center">订单金额</td>
                             </tr>
                             <tr>
-                                <td>总金额<br>（含运费）</td>
+                                <td>总金额<br></td>
                                 <td><?= $order['total_price'] ?>元</td>
                             </tr>
-                            <tr>
+                            <tr style="display: none">
                                 <td>运费</td>
                                 <td>
                                     <?php if ($order['express_price_1']): ?>
@@ -259,22 +259,21 @@ $this->params['active_nav_group'] = 3;
                             <?php endif; ?>
                         </table>
                         <table class="table table-bordered">
+
+                            <thead style="text-align: center">
+
                             <tr>
                                 <td colspan="3" style="text-align: center">保险信息</td>
                             </tr>
-
+                            <tr><td style="text-align: center;">姓名</td><td>电话</td><td>身份证号</td></tr>
+                            </thead>
 
                             <?php foreach ($baoxian_list as $baoxian): ?>
-                                <tr>
-                                    <td rowspan="4"><?= $baoxian['name'] ?></td>
-                                    <td class="text-right">电话</td>
-                                    <td><?= $baoxian['tel'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>身份证号</td>
-                                    <td><?= $baoxian['idCard'] ?></td>
-                                </tr>
-
+                              <tr>
+                                <td style="text-align: left"><?= $baoxian['name']?></td>
+                                <td class="text-left"><?= $baoxian['tel'] ?></td>
+                                <td style="text-align: left"><?= $baoxian['idCard']?></td>
+                            </tr>
                             <?php endforeach; ?>
 
                         </table>

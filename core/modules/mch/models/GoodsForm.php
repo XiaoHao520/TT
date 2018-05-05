@@ -61,6 +61,7 @@ class GoodsForm extends Model
     public $parameter;
     public $dock_id;
     public $tpl_user;
+    public $sub_title;
 
     /**
      * @return array
@@ -69,11 +70,11 @@ class GoodsForm extends Model
     {
         return [
             [['name', 'service', 'unit'], 'trim'],
-            [['store_id', 'name', 'price', 'cat_id', 'detail', 'goods_pic_list', 'cover_pic', 'address', 'time', 'dock'], 'required'],
+            [['store_id', 'name', 'price', 'cat_id', 'detail', 'goods_pic_list', 'cover_pic', 'address', 'time', 'dock','sub_title'], 'required'],
             [['store_id', 'sort', 'virtual_sales', 'freight', 'share_type', 'quick_purchase', 'hot_cakes'], 'integer'],
             [['price', 'original_price', 'weight'], 'number'],
             [['price',], 'number', 'min' => 0.01,],
-            [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', 'tpl_user'], 'string'],
+            [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', 'tpl_user','sub_title'], 'string'],
             [['name', 'capacity'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 1000],
             [['virtual_sales', 'timelong'], 'default', 'value' => 0],
@@ -116,7 +117,8 @@ class GoodsForm extends Model
             'dock' => '码头',
             'dock_id' => '码头id',
             'address'=>'商品地址',
-            'tel_user'=>'接收模板消息的用户ID'
+            'tel_user'=>'接收模板消息的用户ID',
+            'sub_title'=>'商品描述'
 
         ];
     }
@@ -209,6 +211,7 @@ class GoodsForm extends Model
             $goods->parameter = $this->parameter;
             //$goods->address = $this->address;
             $goods->dock_id = $this->dock_id;
+           // $goods->sub_title=$this->sub_title;
             /* 要注意的代码*/
             $dock=Dock::findOne(['id'=>$this->dock_id]);
             $goods->dock=$dock->name;

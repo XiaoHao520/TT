@@ -45,7 +45,7 @@ if ($status === '' || $status === null || $status == -1)
     }
 
     .goods-pic {
-        width: 5.5rem;
+        width: 9.5rem;
         height: 5.5rem;
         display: inline-block;
         background-color: #ddd;
@@ -110,7 +110,7 @@ if ($status === '' || $status === null || $status == -1)
                                     <select class="form-control" name="keyword_1">
                                         <option value="1" <?= $_GET['keyword_1'] == 1 ? "selected" : "" ?>>订单号</option>
                                         <option value="2" <?= $_GET['keyword_1'] == 2 ? "selected" : "" ?>>用户</option>
-                                        <option value="3" <?= $_GET['keyword_1'] == 3 ? "selected" : "" ?>>收货人</option>
+                                        <option value="3" <?= $_GET['keyword_1'] == 3 ? "selected" : "" ?>>联系人</option>
                                     </select>
                                 </div>
                                 <div class="col-7">
@@ -192,11 +192,11 @@ if ($status === '' || $status === null || $status == -1)
                 </li>
                 <li class="nav-item">
                     <a class="status-item nav-link <?= $status == 1 ? 'active' : null ?>"
-                       href="<?= $urlManager->createUrl(array_merge([$_GET['r']], $condition, ['status' => 1])) ?>">待发货<?= $store_data['status_count']['status_1'] ? '(' . $store_data['status_count']['status_1'] . ')' : null ?></a>
+                       href="<?= $urlManager->createUrl(array_merge([$_GET['r']], $condition, ['status' => 1])) ?>">待出发<?= $store_data['status_count']['status_1'] ? '(' . $store_data['status_count']['status_1'] . ')' : null ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="status-item  nav-link <?= $status == 2 ? 'active' : null ?>"
-                       href="<?= $urlManager->createUrl(array_merge([$_GET['r']], $condition, ['status' => 2])) ?>">待收货<?= $store_data['status_count']['status_2'] ? '(' . $store_data['status_count']['status_2'] . ')' : null ?></a>
+                       href="<?= $urlManager->createUrl(array_merge([$_GET['r']], $condition, ['status' => 2])) ?>">待核销<?= $store_data['status_count']['status_2'] ? '(' . $store_data['status_count']['status_2'] . ')' : null ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="status-item  nav-link <?= $status == 3 ? 'active' : null ?>"
@@ -260,10 +260,10 @@ if ($status === '' || $status === null || $status == -1)
                         <td class="order-tab-2">
                             <div>总金额：<?= $order_item['total_price'] ?>元（含运费）</div>
                             <?php if ($order_item['express_price_1']): ?>
-                                <div>运费：<?= $order_item['express_price_1'] ?>元</div>
-                                <div class="text-danger">包邮，运费减免</div>
+                                <div style="display: none">运费：<?= $order_item['express_price_1'] ?>元</div>
+                                <div style="display: none" class="text-danger">包邮，运费减免</div>
                             <?php else: ?>
-                                <div>运费：<?= $order_item['express_price'] ?>元</div>
+                                <div style="display: none">运费：<?= $order_item['express_price'] ?>元</div>
                             <?php endif; ?>
                             <?php if ($order_item['user_coupon_id']): ?>
                                 <div>优惠券优惠：<?= $order_item['coupon_sub_price'] ?>元</div>
@@ -321,7 +321,7 @@ if ($status === '' || $status === null || $status == -1)
                                 </div>
                             <?php endif; ?>
 
-                            <div>
+                            <div style="display: none;">
                                 发货方式：
                                 <?php if ($order_item['is_offline'] == 1): ?>
                                     <span class="badge badge-warning">到店自提</span>
@@ -331,31 +331,31 @@ if ($status === '' || $status === null || $status == -1)
                             </div>
                             <?php if ($order_item['is_pay'] == 1): ?>
                                 <div>
-                                    发货状态：
+                                    确认状态：
                                     <?php if ($order_item['is_send'] == 1): ?>
-                                        <span class="badge badge-success">已发货</span>
+                                        <span class="badge badge-success">已确认</span>
                                     <?php else: ?>
-                                        <span class="badge badge-default">未发货</span>
+                                        <span class="badge badge-default">未确认</span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
                             <?php if ($order_item['is_send'] == 1): ?>
                                 <div>
-                                    收货状态：
+                                    核销状态：
                                     <?php if ($order_item['is_confirm'] == 1): ?>
-                                        <span class="badge badge-success">已收货</span>
+                                        <span class="badge badge-success">已核销</span>
                                     <?php else: ?>
-                                        <span class="badge badge-default">未收货</span>
+                                        <span class="badge badge-default">未核销</span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
                             <?php if ($order_item['is_send'] == 1): ?>
                                 <?php if ($order_item['is_offline'] == 0 || $order_item['express']): ?>
-                                    <div>快递单号：<a href="https://www.baidu.com/s?wd=<?= $order_item['express_no'] ?>"
+                                    <div style="display: none">快递单号：<a href="https://www.baidu.com/s?wd=<?= $order_item['express_no'] ?>"
                                                  target="_blank"><?= $order_item['express_no'] ?></a></div>
-                                    <div>快递公司：<?= $order_item['express'] ?></div>
+                                    <div style="display: none;">快递公司：<?= $order_item['express'] ?></div>
                                 <?php elseif ($order_item['is_offline'] == 1): ?>
                                     <div>核销员：<?= $order_item['clerk_name'] ?></div>
                                 <?php endif; ?>
@@ -395,7 +395,7 @@ if ($status === '' || $status === null || $status == -1)
                             <?php else: ?>
                                 <?php if ($order_item['is_pay'] == 1 && $order_item['is_confirm'] != 1): ?>
                                     <a class="btn btn-sm btn-primary send-btn" href="javascript:"
-                                       data-order-id="<?= $order_item['id'] ?>"><?= ($order_item['is_send'] == 1) ? "修改快递单号" : "发货" ?></a>
+                                       data-order-id="<?= $order_item['id'] ?>"><?= ($order_item['is_send'] == 1) ? "修改快递单号" : "确认出发时间" ?></a>
                                 <?php endif; ?>
                             <?php endif; ?>
                             <a class="btn btn-sm btn-primary"
@@ -445,27 +445,28 @@ if ($status === '' || $status === null || $status == -1)
                         <form class="send-form" method="post">
                             <div class="form-group row">
                                 <div class="col-3 text-right">
-                                    <label class=" col-form-label">物流选择</label>
+                                    <label class=" col-form-label">是否确认</label>
                                 </div>
                                 <div class="col-9">
                                     <div class="pt-1">
                                         <label class="custom-control custom-radio">
-                                            <input id="radio1" value="1" checked
+                                            <input id="radio2" value="0" name="is_express" type="radio"
+                                                   class="custom-control-input is-express" checked>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">立即确认</span>
+                                        </label>
+                                        <label class="custom-control custom-radio" style="display: none">
+                                            <input id="radio1" value="1"
                                                    name="is_express" type="radio"
                                                    class="custom-control-input is-express">
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description">快递</span>
                                         </label>
-                                        <label class="custom-control custom-radio">
-                                            <input id="radio2" value="0" name="is_express" type="radio"
-                                                   class="custom-control-input is-express">
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">无需物流</span>
-                                        </label>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="is-true-express">
+                            <div class="is-true-express" style="display: none;">
                                 <input class="form-control" type="hidden" autocomplete="off" name="order_id">
                                 <label>快递公司</label>
                                 <div class="input-group mb-3">
