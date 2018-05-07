@@ -117,10 +117,12 @@ if ($status === '' || $status === null || $status == -1)
                             <?php if ($order_item['parent_id'] == 0 && $order_item['is_group'] == 1): ?>
                                 <span class="mr-5">
                                 <span class="badge badge-danger">团长</span>
-                                           <span style="margin-right:10px;margin-left:20px;background-color:red;color:white; padding: 6px 4px;border-radius:7px;">保险信息</span><span style="margin-right: 10px">姓名：<?=$order_item['baoxian']['name']?> </span>   <span style="margin-right: 10px">联系电话：<?=$order_item['baoxian']['tel']?></span>  <span style="margin-right: 10px"> 身份证：<?=$order_item['baoxian']['idCard']?></span>
 
                             </span>
+
                             <?php endif; ?>
+                            <span style="margin-right:10px;margin-left:20px;background-color:red;color:white; padding: 6px 4px;border-radius:7px;">保险信息</span><span style="margin-right: 10px">姓名：<?=$order_item['baoxian']['name']?> </span>   <span style="margin-right: 10px">联系电话：<?=$order_item['baoxian']['tel']?></span>  <span style="margin-right: 10px"> 身份证：<?=$order_item['baoxian']['idCard']?></span>
+
                             <?php if ($order_item['order_no'] == 'robot'): ?>
                                 <span class="badge badge-danger">机器人</span>
                             <?php endif; ?>

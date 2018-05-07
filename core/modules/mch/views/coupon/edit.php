@@ -77,7 +77,7 @@ if (!$returnUrl)
                     <div class="col-9">
                         <input class="form-control" type="number" step="0.01" min="0" name="min_price"
                                value="<?= $model->min_price ? $model->min_price : 0 ?>">
-                        <div class="fs-sm text-muted">购物金额（不含运费）达到最低消费金额才可使用优惠券，无门槛优惠券请填0</div>
+                        <div class="fs-sm text-muted">购物金额达到最低消费金额才可使用优惠券，无门槛优惠券请填0</div>
                     </div>
                 </div>
 

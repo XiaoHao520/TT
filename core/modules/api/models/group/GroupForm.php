@@ -11,6 +11,7 @@ namespace app\modules\api\models\group;
 
 use app\models\Article;
 use app\models\Order;
+use app\models\PtCat;
 use app\models\PtGoods;
 use app\models\PtOrder;
 use app\models\PtOrderDetail;
@@ -75,6 +76,10 @@ class GroupForm extends Model
             ];
         }
 
+        $cat=PtCat::findOne(['id'=>$goods->cat_id]);
+        if (!$cat){
+            return ["code"=>1,'msg'=>'商品分类不存在'];
+        }
         $new_goods = [
             'id'  => $goods->id,
             'name'  => $goods->name,
@@ -83,6 +88,9 @@ class GroupForm extends Model
             'cover_pic'         => $goods->cover_pic,
             'group_num'         => $goods->group_num,
             'type'              => $goods->type,
+            'timelong'          =>$goods->timelong,
+            'time'              =>$goods->time,
+            'buy_method'       =>$cat->buy_method
         ];
 
         $attr_group_list = $goods->getAttrGroupList();

@@ -258,7 +258,7 @@ if ($status === '' || $status === null || $status == -1)
                             <?php endforeach; ?>
                         </td>
                         <td class="order-tab-2">
-                            <div>总金额：<?= $order_item['total_price'] ?>元（含运费）</div>
+                            <div>总金额：<?= $order_item['total_price'] ?>元</div>
                             <?php if ($order_item['express_price_1']): ?>
                                 <div style="display: none">运费：<?= $order_item['express_price_1'] ?>元</div>
                                 <div style="display: none" class="text-danger">包邮，运费减免</div>
