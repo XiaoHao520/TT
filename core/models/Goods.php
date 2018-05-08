@@ -64,7 +64,7 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['store_id', 'name', 'detail', 'attr','sub_title'], 'required'],
+            [['store_id', 'name', 'detail', 'attr'], 'required'],
             [['store_id', 'cat_id', 'status', 'addtime', 'is_delete', 'sort', 'virtual_sales', 'individual_share', 'freight', 'use_attr', 'share_type'], 'integer'],
             [['price', 'original_price', 'share_commission_first', 'share_commission_second', 'share_commission_third', 'weight','latitude','longitude'], 'number'],
             [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock','sub_title'], 'string'],

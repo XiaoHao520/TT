@@ -328,7 +328,7 @@ if (!$returnUrl)
                             <?php foreach ($dock_list as $dock): ?>
 
                                 <?php if($dock['id']==$goods['dock_id']):?>
-                                    <label class="radio-inline">
+                                    <label class="radio-inline col-4">
                                         <input type="radio" name="model[dock_id]"  value=" <?=$dock['id']?>" checked>  <?=$dock['name']?>
                                         <input type="hidden" name="model[latitude]" value="<?=$dock['latitude']?>">
                                         <input type="hidden" name="model[longitude]" value="<?=$dock['longitude']?>">
@@ -336,7 +336,7 @@ if (!$returnUrl)
                                         <input type="hidden" name="model[dock]" value="<?=$dock['name']?>">
                                     </label>
                                 <?php else:?>
-                                    <label class="radio-inline">
+                                    <label class="radio-inline col-4">
                                         <input type="radio" name="model[dock_id]" value=" <?=$dock['id']?>">  <?=$dock['name']?>
                                         <input type="hidden" name="model[latitude]" value="<?=$dock['latitude']?>">
                                         <input type="hidden" name="model[longitude]" value="<?=$dock['longitude']?>">
@@ -417,7 +417,7 @@ if (!$returnUrl)
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">重量</label>
                         </div>
@@ -655,7 +655,7 @@ if (!$returnUrl)
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">服务内容</label>
                         </div>
@@ -666,7 +666,7 @@ if (!$returnUrl)
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">运费设置</label>
                         </div>
@@ -680,7 +680,7 @@ if (!$returnUrl)
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">送货方式</label>
                         </div>

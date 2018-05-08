@@ -138,6 +138,37 @@ class GoodsController extends Controller
 
         $goods = Goods::findOne(['id' => $id, 'store_id' => $this->store->id]);
         $docks=Dock::find()->where(['store_id'=>$this->store->id,'is_delete'=>0])->all();
+
+        if(!$docks){
+            $docks_arr=[];
+            foreach ($docks as $dock){
+                array_push($docks_arr,$dock['name']);
+            }
+
+            $coll = collator_create('zh-CN'); // 使用中国大陆的语言习惯（拼音排序）
+            usort($docks_arr, [$coll, 'compare']);
+            $docks_list=[];
+            for($i=0;$i<count($docks_arr);$i++){
+                foreach ($docks as $dock){
+                    if($dock['name']==$docks_arr[$i]){
+                        $docks_list[$i]=$dock;
+                    }
+                }
+            }
+        $docks=$docks_list;
+       }
+
+
+
+
+
+
+
+
+
+
+
+
         if (!$goods) {
             $goods = new Goods();
         }
