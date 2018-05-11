@@ -204,7 +204,7 @@ $this->params['active_nav_group'] = 1;
                                       name="content"><?= $shop->content ?></textarea>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" hidden>
                     <div class="col-3 text-right">
                         <label class=" col-form-label">可核销的码头：</label>
                     </div>
@@ -214,7 +214,7 @@ $this->params['active_nav_group'] = 1;
                     </div>
                 </div>
 
-                <div class="form-group row" id="page">
+                <div class="form-group row" id="page" hidden>
                     <div class="col-3 text-right">
                         <label class=" col-form-label">码头列表：</label>
                     </div>

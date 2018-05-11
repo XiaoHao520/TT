@@ -48,7 +48,8 @@ class Shop extends \yii\db\ActiveRecord
             [['store_id', 'is_delete', 'addtime', 'score','user_id'], 'integer'],
             [['longitude', 'latitude', 'cover_url', 'pic_url', 'content','username','password','docks_name','docks_id','login_address'], 'string'],
             [['name', 'mobile', 'address', 'shop_time'], 'string', 'max' => 255],
-            [['docks_name','docks_id'],'default','value'=>null]
+            [['docks_name','docks_id'],'default','value'=>null],
+            [['login_address'],'default','value'=>0]
         ];
     }
 

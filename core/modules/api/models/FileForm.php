@@ -25,7 +25,7 @@ class FileForm extends Model
         if ($this->validate()) {
             $path = 'uploads/image/shop/' . md5(time()) . '.' . $this->file->extension;
             $this->file->saveAs($path);
-            $path = 'http://tt.sinbel.cn/addons/zjhj_mall/core/web/' . $path;
+            $path = \Yii::$app->request->hostInfo.'/addons/zjhj_mall/core/web/' . $path;
             return $path;
         } else {
             return false;

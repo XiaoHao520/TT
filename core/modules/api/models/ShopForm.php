@@ -31,7 +31,7 @@ class ShopForm extends Model
     public $shop_time;
     public $shop_pic;
     public $user_id;
-
+    public $login_address;
 
 
 /*    public function rules()
@@ -47,9 +47,10 @@ class ShopForm extends Model
         return [
             [['user_id'],'integer'],
             [['name', 'mobile', 'address','latitude','longitude'], 'required'],
-            [['name', 'mobile', 'address','latitude','longitude','cover_url','pic_url','content','shop_time','shop_pic'], 'string'],
+            [['name', 'mobile', 'address','latitude','longitude','cover_url','pic_url','content','shop_time','shop_pic','login_address'], 'string'],
             [['name', 'mobile', 'address','cover_url','pic_url','content','shop_time'], 'trim'],
             [['score'],'integer','min'=>1,'max'=>5],
+            [['login_address'],'default','value'=>0]
         ];
     }
 
