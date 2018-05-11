@@ -15,6 +15,40 @@ $this->title = '商品列表';
 $this->params['active_nav_group'] = 2;
 //echo Yii::$app->admin->id;
 ?>
+
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title><?= $this->title ?></title>
+    <link href="//at.alicdn.com/t/font_353057_lxz6kujlw4mfgvi.css" rel="stylesheet">
+    <link href="<?= Yii::$app->request->baseUrl ?>/statics/mch/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= Yii::$app->request->baseUrl ?>/statics/mch/css/jquery.datetimepicker.min.css" rel="stylesheet">
+    <link href="<?= Yii::$app->request->baseUrl ?>/statics/css/flex.css?version=<?= $version ?>" rel="stylesheet">
+    <link href="<?= Yii::$app->request->baseUrl ?>/statics/css/common.css?version=<?= $version ?>" rel="stylesheet">
+    <link href="<?= Yii::$app->request->baseUrl ?>/statics/mch/css/common.v2.css?version=<?= $version ?>"
+          rel="stylesheet">
+
+    <script>var _csrf = "<?=Yii::$app->request->csrfToken?>";</script>
+    <script>var _upload_url = "<?=Yii::$app->urlManager->createUrl(['upload/file'])?>";</script>
+    <script>var _upload_file_list_url = "<?=Yii::$app->urlManager->createUrl(['mch/store/upload-file-list'])?>";</script>
+
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/jquery.min.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/vue.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/tether.min.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/bootstrap.min.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/plupload.full.min.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/jquery.datetimepicker.full.min.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/js/common.js?version=<?= $version ?>"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/common.v2.js?version=<?= $version ?>"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/js/clipboard.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/vendor/layer/layer.js"></script>
+    <script src="<?= Yii::$app->request->baseUrl ?>/statics/mch/vendor/laydate/laydate.js"></script>
+</head>
+<body>
 <style>
     table {
         table-layout: fixed;
@@ -51,42 +85,59 @@ $this->params['active_nav_group'] = 2;
         background-position: center;
     }
 </style>
+<div class="container">
+
+
 
 <div class="panel mb-3">
-    <div class="panel-header"><?= $this->title ?></div>
+
+
+
+    <div class="panel-header">
+
+
+        <div>
+           <div style="display: flex;font-size: 20px">
+              <div> 用户名：<?=$seller['username']?>
+              </div>
+               <div style="margin-left:40px ">
+                   联系电话：<?=$seller['mobile']?>
+               </div>
+           </div>
+
+            <div>
+                门店名称：<?=$seller['name']?>
+            </div>
+
+           <div>
+                地址：<?=$seller['address']?>
+           </div>
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
     <div class="panel-body">
         <?php
         $status = ['已下架', '已上架'];
         ?>
         <div class="mb-3 clearfix">
+
+
+             <?php if($sh_goods<=5)?>
             <div class="float-left">
-                <a href="<?= $urlManager->createUrl(['mch/goods/goods-edit']) ?>" class="btn btn-primary"><i
+                <a href="<?= $urlManager->createUrl(['sellers/goods/goods-edit']) ?>" class="btn btn-primary"><i
                             class="iconfont icon-playlistadd"></i>添加商品</a>
-                <a href="javascript:void(0)" class="btn btn-secondary batch"
-                   data-url="<?= $urlManager->createUrl(['mch/goods/batch']) ?>" data-content="是否批量上架"
-                   data-type="0">批量上架</a>
-                <a href="javascript:void(0)" class="btn btn-warning batch"
-                   data-url="<?= $urlManager->createUrl(['mch/goods/batch']) ?>" data-content="是否批量下架"
-                   data-type="1">批量下架</a>
-                <a href="javascript:void(0)" class="btn btn-danger batch"
-                   data-url="<?= $urlManager->createUrl(['mch/goods/batch']) ?>" data-content="是否批量删除"
-                   data-type="2">批量删除</a>
-                <a href="javascript:" data-toggle="modal" data-target="#attrAddModal" class="btn btn-primary">批量设置积分</a>
-                <div class="dropdown float-right ml-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?= isset($_GET['cat']) ? $_GET['cat'] : '全部类型' ?>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                         style="max-height: 200px;overflow-y: auto">
-                        <a class="dropdown-item" href="<?= $urlManager->createUrl(['mch/goods/goods']) ?>">全部类型</a>
-                        <?php foreach ($cat_list as $index => $value): ?>
-                            <a class="dropdown-item"
-                               href="<?= $urlManager->createUrl(array_merge(['mch/goods/goods'], $_GET, ['cat' => $value])) ?>"><?= $value ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
+
             </div>
+
+            <?php ?>
             <div class="float-right">
                 <form method="get">
 
@@ -116,26 +167,25 @@ $this->params['active_nav_group'] = 2;
                     </label>
                 </th>
                 <th>商品类型</th>
-                <th class="text-left">商品名称</th>
+                <th>商品名称</th>
                 <th>商品图片</th>
                 <th>售价</th>
                 <th>库存</th>
                 <th>状态</th>
-                <th>虚拟销量</th>
-                <th>排序</th>
+                <th hidden>虚拟销量</th>
+                <th hidden>排序</th>
                 <th>操作</th>
             </tr>
             </thead>
             <col style="width: 10%">
-            <col style="width: 7%">
+            <col style="width: 10%">
             <col style="width: 19%">
-            <col style="width: 8%">
-            <col style="width: 8%">
             <col style="width: 10%">
             <col style="width: 10%">
             <col style="width: 10%">
-            <col style="width: 5%">
-            <col style="width: 13%">
+
+            <col style="width: 15%">
+            <col style="width: 15%">
             <tbody>
             <?php foreach ($list as $index => $goods): ?>
                 <tr>
@@ -169,28 +219,16 @@ $this->params['active_nav_group'] = 2;
                     </td>
                     <td class="nowrap">
                         <?php if ($goods->status == 1): ?>
-                            <span class="badge badge-success"><?= $status[$goods->status] ?></span>
-                            |
-                            <a href="javascript:" onclick="upDown(<?= $goods->id ?>,'down');">下架</a>
+                            <span class="badge badge-success">已上架</span>
                         <?php else: ?>
-                            <span class="badge badge-default"><?= $status[$goods->status] ?></span>
-                            |
-                            <a href="javascript:" onclick="upDown(<?= $goods->id ?>,'up');">上架</a>
+                            <span class="badge badge-default">审核中</span>
                         <?php endif ?>
                     </td>
-                    <td class="nowrap">
-                        <?= $goods->virtual_sales ?>
-                    </td>
-                    <td class="nowrap">
-                        <?= $goods->sort ?>
-                    </td>
+
                     <td class="nowrap">
                         <a class="btn btn-sm btn-primary"
-                           href="<?= $urlManager->createUrl(['mch/goods/goods-edit', 'id' => $goods->id]) ?>">修改</a>
-                        <a class="btn btn-sm btn-primary copy" data-clipboard-text="/pages/goods/goods?id=<?= $goods->id ?>"
-                           href="javascript:" hidden>复制链接</a>
-                        <a class="btn btn-sm btn-danger del"
-                           href="<?= $urlManager->createUrl(['mch/goods/goods-del', 'id' => $goods->id]) ?>">删除</a>
+                           href="<?= $urlManager->createUrl(['sellers/goods/goods-edit', 'id' => $goods->id]) ?>">修改</a>
+
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -224,6 +262,7 @@ $this->params['active_nav_group'] = 2;
     </div>
 </div>
 
+</div>
 
 <!--添加规格-->
 <div class="modal fade" id="attrAddModal" data-backdrop="static">
@@ -513,3 +552,5 @@ $this->params['active_nav_group'] = 2;
         });
     })
 </script>
+</body>
+</html>

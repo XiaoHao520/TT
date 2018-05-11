@@ -53,7 +53,7 @@ class OrderRevokeForm extends Model
         //已支付订单需要后台先审核
         if ($order->is_pay == 1 && !$this->delete_pass) {
             $order->apply_delete = 1;
-            Sms::send_refund($order->store_id, $order->order_no);
+           // Sms::send_refund($order->store_id, $order->order_no);
             $mail = new SendMail($order->store_id, $order->id);
             $mail->send_refund();
             if ($order->save()) {

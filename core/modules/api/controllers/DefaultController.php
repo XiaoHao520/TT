@@ -347,4 +347,18 @@ class DefaultController extends Controller
         $form->attributes = \Yii::$app->request->get();
         $this->renderJson($form->search());
     }
+    public function actionBanners()
+    {
+        $banner_list = Banner::find()->where([
+            'is_delete' => 0,
+            'store_id' => $this->store_id,
+            'type' => 1,
+        ])->orderBy('sort ASC')->asArray()->all();
+
+        $this->renderJson([
+            'data'=>[
+                'banners'=>$banner_list
+            ]
+        ]);
+    }
 }

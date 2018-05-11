@@ -44,6 +44,16 @@ class AdminBehavior extends Behavior
             \Yii::$app->end();
         }
         if (\Yii::$app->admin->id == 1) {
+
+        /* $session= \Yii::$app->session;
+            if(!$session->isActive){
+                $session->open();
+            }
+            $session->set("status",1);
+
+            var_dump($session);
+            die();*/
+
             return true;
         }
         if (is_array($this->ignore) && in_array($e->action->id, $this->ignore))

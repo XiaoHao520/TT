@@ -12,8 +12,12 @@ namespace app\modules\api\models;
 use app\models\Goods;
 use app\models\Order;
 use app\models\OrderDetail;
+use app\models\Setting;
 use app\models\User;
+use app\modules\mch\models\ShareSettingForm;
 use function GuzzleHttp\Promise\all;
+use yii\db\Exception;
+use yii\db\StaleObjectException;
 
 class OrderClerkForm extends Model
 {
@@ -51,14 +55,16 @@ class OrderClerkForm extends Model
             ];
         }
         if ($order->is_send == 1) {
-            if($order->is_confirm ==1){
+            if ($order->is_confirm == 1) {
+
+
                 return [
                     'code' => 1,
                     'msg' => '订单已核销'
                 ];
             }
-
         }
+
         $order->clerk_id = $user->id;
         $order->is_send = 1;
         $order->shop_id = $user->shop_id;
@@ -66,17 +72,77 @@ class OrderClerkForm extends Model
         $order->send_time = time();
         $order->is_confirm = 1;
         $order->confirm_time = time();
+        //当这个订单完成了
 
-        if ($order->save()) {
-            return [
-                'code' => 0,
-                'msg' => '成功'
-            ];
-        } else {
-            return [
-                'code' => 1,
-                'msg' => '网络异常'
-            ];
+        $store_setting = Setting::findOne(['store_id' => $this->store_id]);
+        if ($store_setting) {
+            $parent_id = 0;
+            $order_temp = Order::findOne(['id' => $this->order_id]);
+            $first_price = $order_temp->first_price;
+            $second_price = $order_temp->second_price;
+            $third_price = $order_temp->third_price;
+            for ($i = 0; $i < intval($store_setting->level); $i++) {
+                if ($parent_id == 0) {
+                    //算1级的钱
+                    $parent_id = $order_temp->parent_id;
+                    $parent_money = floatval($first_price);
+                    $user = User::findOne($parent_id);
+                    if($user){
+                        $user->total_price = floatval($user->total_price) + $parent_money;
+                        $user->price=floatval($user->price) + $parent_money;
+                        $parent_id = $user->parent_id;
+                        try {
+                            $user->update();
+                            if ($parent_id == 0) {
+                                break;
+                            }
+                        } catch (StaleObjectException $e) {
+                        } catch (\Exception $e) {
+                        }
+                    }
+
+
+                } else {
+                    $currnt_user_id = $parent_id;
+                    $user = User::findOne(["id" => $currnt_user_id]);
+                    if(!$user){
+                           break;
+                    }
+
+                    $parent_id = $user->parent_id;
+                    if ($i == 1) {
+                        $parent_money = floatval($second_price);
+                    }
+                    if ($i == 2) {
+                        $parent_money = floatval($third_price);
+                    }
+                    $user->total_price = floatval($user->total_price) + $parent_money;
+                    $user->price=floatval($user->price) + $parent_money;
+                    $parent_id = $user->parent_id;
+                    try {
+                        $user->update();
+                        if ($parent_id == 0) {
+                            break;
+                        }
+                    } catch (StaleObjectException $e) {
+                    } catch (\Exception $e) {
+                    }
+                }
+            }
         }
+
+
+           if ($order->save()) {
+              return [
+                  'code' => 0,
+                  'msg' => '成功'
+              ];
+          } else {
+              return [
+                  'code' => 1,
+                  'msg' => '网络异常',
+                  //'setting'=>$store_setting
+              ];
+          }
     }
 }

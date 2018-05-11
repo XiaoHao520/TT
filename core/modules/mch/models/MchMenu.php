@@ -127,6 +127,11 @@ class MchMenu
                                 'name' => '小程序页面',
                                 'route' => 'mch/store/wxapp-pages',
                             ],
+                            [
+                                'name'=>'引导页背景',
+                                'route'=>'mch/store/wxapp-pages'
+
+                            ],
                         ],
                     ],
                     [

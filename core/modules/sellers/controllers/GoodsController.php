@@ -6,7 +6,7 @@
  * Time: 10:56
  */
 
-namespace app\modules\mch\controllers;
+namespace app\modules\sellers\controllers;
 
 use app\models\Attr;
 use app\models\AttrGroup;
@@ -17,10 +17,12 @@ use app\models\Goods;
 use app\models\GoodsCard;
 use app\models\GoodsCat;
 use app\models\PostageRules;
+use app\models\Seller;
+use app\models\Shop;
 use app\modules\mch\models\CatForm;
-use app\modules\mch\models\CopyForm;
-use app\modules\mch\models\GoodsForm;
-use app\modules\mch\models\GoodsQrcodeForm;
+
+use app\modules\sellers\models\GoodsForm;
+
 use yii\data\Pagination;
 use yii\helpers\VarDumper;
 use yii\web\HttpException;
@@ -78,14 +80,17 @@ class GoodsController extends Controller
      */
     public function actionGoods($keyword = null)
     {
+        $seller_id = \Yii::$app->session->get("seller_id");
+
+        if ($seller_id == 0) {
+            \Yii::$app->response->redirect(\Yii::$app->urlManager->createUrl('sellers/seller/login'))->send();
+        }
         $query_cat = GoodsCat::find()->alias('gc')->leftJoin(['c' => Cat::tableName()], 'c.id=gc.cat_id')
-            ->where(['gc.store_id' => $this->store->id,'gc.is_delete'=>0])->select('gc.goods_id,c.name,gc.cat_id');
-        $query = Goods::find()->alias('g')->where(['g.store_id' => $this->store->id, 'g.is_delete' => 0]);
+            ->where(['gc.is_delete' => 0])->select('gc.goods_id,c.name,gc.cat_id');
+        $query = Goods::find()->alias('g')->where(['g.is_delete' => 0]);
         $query->leftJoin(['c' => Cat::tableName()], 'c.id=g.cat_id');
         $query->leftJoin(['gc' => $query_cat], 'gc.goods_id=g.id');
-
         $cat_query = clone $query;
-
         $query->select('g.id,g.name,g.price,g.original_price,g.status,g.cover_pic,g.sort,g.attr,g.cat_id,g.virtual_sales,g.store_id');
         if (trim($keyword)) {
             $query->andWhere(['LIKE', 'g.name', $keyword]);
@@ -99,10 +104,11 @@ class GoodsController extends Controller
 //            ]);
             $query->andWhere([
                 'or',
-                ['c.name'=> $cat],
-                ['gc.name'=>$cat]
+                ['c.name' => $cat],
+                ['gc.name' => $cat]
             ]);
         }
+        $query->where(['seller_id' => $seller_id]);
         $cat_list = $cat_query->groupBy('name')->orderBy(['g.cat_id' => SORT_ASC])->select([
             '(case when g.cat_id=0 then gc.name else c.name end) name'
         ])->asArray()->column();
@@ -110,10 +116,19 @@ class GoodsController extends Controller
         $pagination = new Pagination(['totalCount' => $count,]);
         $list = $query->groupBy('g.id')->orderBy('g.sort ASC,g.addtime DESC')
             ->limit($pagination->limit)->offset($pagination->offset)->all();
+        $seller = Seller::find()->alias('s')->leftJoin(['p' => Shop::tableName()], 's.shop_id=p.id')->select('s.username,s.addtime,p.address,p.name,p.mobile')->where(['s.id' => $seller_id])->asArray()->one();
+
+
+         $shenhe_goods=Goods::find()->where(['seller_id'=>$seller_id,'status'=>0])->count();
+
+
+
         return $this->render('goods', [
             'list' => $list,
             'pagination' => $pagination,
-            'cat_list' => $cat_list
+            'cat_list' => $cat_list,
+            'seller' => $seller,
+            'sh_goods'=>$shenhe_goods
         ]);
     }
 
@@ -136,28 +151,35 @@ class GoodsController extends Controller
     {
 
 
-        $goods = Goods::findOne(['id' => $id, 'store_id' => $this->store->id]);
-        $docks=Dock::find()->where(['store_id'=>$this->store->id,'is_delete'=>0])->all();
+        $seller_id = \Yii::$app->session->get("seller_id");
 
-        if(!$docks){
-            $docks_arr=[];
-            foreach ($docks as $dock){
-                array_push($docks_arr,$dock['name']);
+        if ($seller_id == null) {
+
+            \Yii::$app->response->redirect(\Yii::$app->urlManager->createUrl('sellers/seller/login'))->send();
+        }
+
+
+        $goods = Goods::findOne(['id' => $id]);
+        $docks = Dock::find()->where(['is_delete' => 0])->all();
+
+        if (!$docks) {
+            $docks_arr = [];
+            foreach ($docks as $dock) {
+                array_push($docks_arr, $dock['name']);
             }
 
             $coll = collator_create('zh-CN'); // 使用中国大陆的语言习惯（拼音排序）
             usort($docks_arr, [$coll, 'compare']);
-            $docks_list=[];
-            for($i=0;$i<count($docks_arr);$i++){
-                foreach ($docks as $dock){
-                    if($dock['name']==$docks_arr[$i]){
-                        $docks_list[$i]=$dock;
+            $docks_list = [];
+            for ($i = 0; $i < count($docks_arr); $i++) {
+                foreach ($docks as $dock) {
+                    if ($dock['name'] == $docks_arr[$i]) {
+                        $docks_list[$i] = $dock;
                     }
                 }
             }
-        $docks=$docks_list;
-       }
-
+            $docks = $docks_list;
+        }
 
 
         if (!$goods) {
@@ -166,9 +188,11 @@ class GoodsController extends Controller
         $form = new GoodsForm();
         if (\Yii::$app->request->isPost) {
             $model = \Yii::$app->request->post('model');
-            if($model['quick_purchase'] == 0){
+            if ($model['quick_purchase'] == 0) {
                 $model['hot_cakes'] = 0;
             }
+
+
             $model['store_id'] = $this->store->id;
             $form->attributes = $model;
             $form->attr = \Yii::$app->request->post('attr');
@@ -176,7 +200,9 @@ class GoodsController extends Controller
             $form->full_cut = \Yii::$app->request->post('full_cut');
             $form->integral = \Yii::$app->request->post('integral');
             $form->goods = $goods;
-           return json_encode($form->save(), JSON_UNESCAPED_UNICODE);
+            $form->seller_id = $seller_id;
+
+            return json_encode($form->save(), JSON_UNESCAPED_UNICODE);
         }
 
         $cat_list = Cat::find()->where(['store_id' => $this->store->id, 'is_delete' => 0, 'parent_id' => 0])->all();
@@ -203,7 +229,7 @@ class GoodsController extends Controller
         $goods_cat_list = Goods::getCatList($goods);
         return $this->render('goods-edit', [
             'goods' => $goods,
-            'docks'=>$docks,
+            'docks' => $docks,
             'cat_list' => $cat_list,
             'postageRiles' => $postageRiles,
             'card_list' => json_encode($card_list, JSON_UNESCAPED_UNICODE),

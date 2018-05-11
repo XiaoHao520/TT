@@ -393,6 +393,7 @@ $this->params['active_nav_group'] = 11;
     $.ajax({
         dataType: 'json',
         success: function (res) {
+            console.log(res);
             $.loadingHide();
             if (res.code == 0) {
                 app.navbar = res.data.navbar;
@@ -465,6 +466,8 @@ $this->params['active_nav_group'] = 11;
         if (app.editnav.index !== null) {
             Vue.set(app.navbar.navs, app.editnav.index, new_nav)
         } else {
+            
+            console.log(new_nav);
             app.navbar.navs.push(new_nav);
         }
         $('.nav-edit-modal').modal('hide');

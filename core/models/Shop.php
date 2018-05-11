@@ -27,6 +27,7 @@ use Codeception\PHPUnit\ResultPrinter\HTML;
  * @property string $password
  * @property string $docks_name
  * @property string $docks_id
+ * @property string $login_address
  */
 class Shop extends \yii\db\ActiveRecord
 {
@@ -45,7 +46,7 @@ class Shop extends \yii\db\ActiveRecord
     {
         return [
             [['store_id', 'is_delete', 'addtime', 'score','user_id'], 'integer'],
-            [['longitude', 'latitude', 'cover_url', 'pic_url', 'content','username','password','docks_name','docks_id'], 'string'],
+            [['longitude', 'latitude', 'cover_url', 'pic_url', 'content','username','password','docks_name','docks_id','login_address'], 'string'],
             [['name', 'mobile', 'address', 'shop_time'], 'string', 'max' => 255],
             [['docks_name','docks_id'],'default','value'=>null]
         ];
@@ -72,7 +73,8 @@ class Shop extends \yii\db\ActiveRecord
             'shop_time' => '营业时间',
             'content' => '门店介绍',
             'docks_id'=>'核销码头id',
-            'docks_name'=>'核销码头名称'
+            'docks_name'=>'核销码头名称',
+            'login_address'=>'后台登录地址'
         ];
     }
 

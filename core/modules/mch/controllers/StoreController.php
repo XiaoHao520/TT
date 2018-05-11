@@ -985,6 +985,11 @@ class StoreController extends Controller
             $form = new ShopForm();
             $form->store_id = $this->store->id;
             $form->shop = $shop;
+            $username=\Yii::$app->request->post('username');
+            $password=\Yii::$app->request->post('password');
+            $form->username=$username;
+            $form->password=$password;
+
             $form->attributes = \Yii::$app->request->post();
             $this->renderJson($form->save());
         }
@@ -1121,4 +1126,12 @@ class StoreController extends Controller
     public function actionWxappPages(){
         return $this->render('wxapp-pages');
     }
+    public function actionGuidePages(){
+
+
+
+
+
+    }
+
 }

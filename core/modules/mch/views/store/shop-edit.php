@@ -44,6 +44,16 @@ $this->params['active_nav_group'] = 1;
                         <input class="form-control" type="text" name="address" value="<?= $shop->address ?>">
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <div class="col-3 text-right">
+                        <label class=" col-form-label required">后台登录地址：</label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" type="text" name="login_address" value="<?= Yii::$app->request->hostInfo.Yii::$app->urlManager->createUrl(['sellers/seller/login']) ?>">
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <div class="col-3 text-right">
                         <label class=" col-form-label required">门店管理员账号：</label>
@@ -208,14 +218,17 @@ $this->params['active_nav_group'] = 1;
                     <div class="col-3 text-right">
                         <label class=" col-form-label">码头列表：</label>
                     </div>
-                    <div class="col-9" style="display: flex">
+                    <div class="col-9">
+
+
+                    <div class="form-group row">
                        <?php foreach ($docks as $dock): ?>
-                            <div style="width: 100px">
+                            <div class="col-4" style="margin-bottom: 10px">
                             <input id="<?=$dock['id']?>" type="checkbox" name="dock" data-id="<?=$dock['id']?>" value="<?=$dock['name']?>"><?=$dock['name']?>
                             </div>
                          <?php endforeach; ?>
                     </div>
-
+                    </div>
                 </div>
 
 

@@ -136,6 +136,7 @@ class Controller extends \app\controllers\Controller
             $this->redirect($return_url)->send();
             \Yii::$app->end();
         }
+
         return true;
     }
 

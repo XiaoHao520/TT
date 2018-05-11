@@ -10,6 +10,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="200db585-a462-4d58-b6ec-cc76d66dba61" name="chuhai" url="http://118.89.27.146">
+        <fileTransfer host="118.89.27.146" port="21" rootFolder="/addons/zjhj_mall">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

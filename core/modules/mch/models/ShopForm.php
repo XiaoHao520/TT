@@ -10,6 +10,7 @@ namespace app\modules\mch\models;
 
 
 use app\models\Order;
+use app\models\Seller;
 use app\models\Shop;
 use app\models\ShopPic;
 use app\models\Store;
@@ -39,12 +40,13 @@ class ShopForm extends Model
     public $password;
     public $docks_name;
     public $docks_id;
+    public $login_address;
 
     public function rules()
     {
         return [
-            [['name', 'mobile', 'address','latitude','longitude'], 'required'],
-            [['name', 'mobile', 'address','latitude','longitude','cover_url','pic_url','content','shop_time','username','password','docks_name','docks_id'], 'string'],
+            [['name', 'mobile', 'address','latitude','longitude','login_address'], 'required'],
+            [['name', 'mobile', 'address','latitude','longitude','cover_url','pic_url','content','shop_time','username','password','docks_name','docks_id','login_address'], 'string'],
             [['name', 'mobile', 'address','cover_url','pic_url','content','shop_time'], 'trim'],
             [['score'],'integer','min'=>1,'max'=>5],
             [['shop_pic'],'safe']
@@ -65,7 +67,8 @@ class ShopForm extends Model
             'content'=>'门店介绍',
             'shop_time'=>'营业时间',
             'docks_name'=>'码头名称',
-            'docks_id'=>'码头id'
+            'docks_id'=>'码头id',
+            'login_address'=>'后台登录地址'
         ];
     }
 
@@ -79,13 +82,14 @@ class ShopForm extends Model
             $shop->is_delete = 0;
             $shop->addtime = time();
             $shop->store_id = $this->store_id;
-        }
-        if($this->docks_name==''){
 
+        }
+         $shop->login_address=$this->login_address;
+
+        if($this->docks_name==''){
             $this->docks_id=null;
         }
         $shop->attributes = $this->attributes;
-
         if(is_array($this->shop_pic)){
             $shop->cover_url = $this->shop_pic[0];
         }
@@ -98,6 +102,24 @@ class ShopForm extends Model
                 $shop_pic->store_id = $shop->store_id;
                 $shop_pic->is_delete = 0;
                 $shop_pic->save();
+            }
+            if ($this->username!=''&&$this->password!=''){
+
+               $seller=Seller::findOne(['shop_id'=>$shop->id,'store_id'=>$this->store_id]);
+                if($seller){
+                    $seller->password=md5($this->password);
+                    $seller->username=$this->username;
+                    $seller->addtime=time();
+                    $seller->save();
+                }else{
+                    $seller=new Seller();
+                    $seller->password=md5($this->password);
+                    $seller->username=$this->username;
+                    $seller->addtime=time();
+                    $seller->store_id=$this->store_id;
+                    $seller->shop_id=$shop->id;
+                    $seller->save();
+                }
             }
             return [
                 'code' => 0,

@@ -90,6 +90,9 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
+        'sellers' => [
+            'class' => 'app\modules\sellers\Module',
+        ],
     ],
     'params' => $params,
 ];

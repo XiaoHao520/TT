@@ -45,8 +45,8 @@ if ($status === '' || $status === null || $status == -1)
     }
 
     .goods-pic {
-        width: 5.5rem;
-        height: 5.5rem;
+        width: 9.5rem;
+        height: 6.5rem;
         display: inline-block;
         background-color: #ddd;
         background-size: cover;
@@ -169,7 +169,7 @@ if ($status === '' || $status === null || $status == -1)
                         </td>
                         <td class="order-tab-2">
                             <div>总金额：<?= $order_item['total_price'] ?>元</div>
-                            <div>运费：<?= $order_item['express_price'] ?>元</div>
+
                             <div>实际付款：<?= $order_item['pay_price'] ?>元</div>
                         </td>
                         <td class="order-tab-4">
@@ -192,22 +192,22 @@ if ($status === '' || $status === null || $status == -1)
 
                             <?php if ($order_item['is_pay'] == 1): ?>
                                 <div>
-                                    发货状态：
+                                    确认出发状态：
                                     <?php if ($order_item['is_send'] == 1): ?>
-                                        <span class="badge badge-success">已发货</span>
+                                        <span class="badge badge-success">已确认</span>
                                     <?php else: ?>
-                                        <span class="badge badge-default">未发货</span>
+                                        <span class="badge badge-default">未确认</span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
                             <?php if ($order_item['is_send'] == 1): ?>
                                 <div>
-                                    收货状态：
+                                    订单完成状态：
                                     <?php if ($order_item['is_confirm'] == 1): ?>
-                                        <span class="badge badge-success">已收货</span>
+                                        <span class="badge badge-success">已完成</span>
                                     <?php else: ?>
-                                        <span class="badge badge-default">未收货</span>
+                                        <span class="badge badge-default">未完成</span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
@@ -219,9 +219,9 @@ if ($status === '' || $status === null || $status == -1)
 
                             <?php if ($order_item['is_send'] == 1): ?>
                                 <?php if ($order_item['is_offline'] == 0): ?>
-                                    <div>快递单号：<a href="https://www.baidu.com/s?wd=<?= $order_item['express_no'] ?>"
+                                    <div hidden>快递单号：<a href="https://www.baidu.com/s?wd=<?= $order_item['express_no'] ?>"
                                                  target="_blank"><?= $order_item['express_no'] ?></a></div>
-                                    <div>快递公司：<?= $order_item['express'] ?></div>
+                                    <div hidden>快递公司：<?= $order_item['express'] ?></div>
                                 <?php elseif ($order_item['is_offline'] == 1): ?>
                                     <div>核销员：<?= $order_item['clerk_name'] ?></div>
                                 <?php endif; ?>
@@ -258,14 +258,14 @@ if ($status === '' || $status === null || $status == -1)
                     <tr>
                         <td colspan="5">
                             <div>
-                                <span class="mr-3">收货人：<?= $order_item['name'] ?></span>
+                                <span class="mr-3">联系人：<?= $order_item['name'] ?></span>
                                 <span class="mr-3">电话：<?= $order_item['mobile'] ?></span>
                                 <?php if ($order_item['is_offline'] == 0): ?>
                                     <span>地址：<?= $order_item['address'] ?></span>
                                 <?php endif; ?>
                             </div>
                             <?php if ($order_item['shop_id']): ?>
-                                <div>
+                                <div hidden>
                                     <span class="mr-3">门店名称：<?= $order_item['shop']['name'] ?></span>
                                     <span class="mr-3">门店地址：<?= $order_item['shop']['address'] ?></span>
                                     <span class="mr-3">电话：<?= $order_item['shop']['mobile'] ?></span>

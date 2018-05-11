@@ -47,6 +47,7 @@ use yii\helpers\VarDumper;
  * @property string $time
  * @property string $tpl_user
  * @property string $sub_title
+ * @property integer $seller_id
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -65,7 +66,7 @@ class Goods extends \yii\db\ActiveRecord
     {
         return [
             [['store_id', 'name', 'detail', 'attr'], 'required'],
-            [['store_id', 'cat_id', 'status', 'addtime', 'is_delete', 'sort', 'virtual_sales', 'individual_share', 'freight', 'use_attr', 'share_type'], 'integer'],
+            [['store_id', 'cat_id', 'status', 'addtime', 'is_delete', 'sort', 'virtual_sales', 'individual_share', 'freight', 'use_attr', 'share_type','seller_id'], 'integer'],
             [['price', 'original_price', 'share_commission_first', 'share_commission_second', 'share_commission_third', 'weight','latitude','longitude'], 'number'],
             [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock','sub_title'], 'string'],
             [['name', 'unit','timelong'], 'string', 'max' => 255],
@@ -110,7 +111,8 @@ class Goods extends \yii\db\ActiveRecord
             'timelong'=>'时长',
             'capacity'=>"核载人数",
             'tpl_user'=>'接收模板消息的用户ID',
-            'sub_title'=>'商品描述'
+            'sub_title'=>'商品描述',
+            'seller_id'=>'商家id'
         ];
     }
 
