@@ -395,7 +395,7 @@ if ($status === '' || $status === null || $status == -1)
                             <?php else: ?>
                                 <?php if ($order_item['is_pay'] == 1 && $order_item['is_confirm'] != 1): ?>
                                     <a class="btn btn-sm btn-primary send-btn" href="javascript:"
-                                       data-order-id="<?= $order_item['id'] ?>"><?= ($order_item['is_send'] == 1) ? "修改快递单号" : "确认出发时间" ?></a>
+                                       data-order-id="<?= $order_item['id'] ?>"><?= ($order_item['is_send'] == 1) ? "修改" : "确认出发时间" ?></a>
                                 <?php endif; ?>
                             <?php endif; ?>
                             <a class="btn btn-sm btn-primary"

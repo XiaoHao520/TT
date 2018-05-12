@@ -53,7 +53,6 @@ class ShopController extends Controller
         $shop = new Shop();
 
         if (\Yii::$app->request->isPost) {
-
             $form = new ShopForm();
             $form->store_id = $this->store->id;
             $form->shop = $shop;

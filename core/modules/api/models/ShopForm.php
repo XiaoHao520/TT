@@ -57,23 +57,28 @@ class ShopForm extends Model
     public function attributeLabels()
     {
         return [
-            'name'=>'门店名称',
-            'mobile'=>'联系方式',
-            'address'=>'门店地址',
-            'latitude'=>'经纬度',
-            'longitude'=>'经纬度',
-            'score'=>'评分',
-            'cover_url'=>'门店大图',
-            'pic_url'=>'门店小图',
-            'content'=>'门店介绍',
-            'shop_time'=>'营业时间',
+            'id' => 'ID',
+            'store_id' => 'Store ID',
+            'name' => 'Name',
+            'mobile' => 'Mobile',
+            'address' => 'Address',
+            'is_delete' => 'Is Delete',
+            'addtime' => 'Addtime',
+            'longitude' => 'Longitude',
+            'latitude' => 'Latitude',
+            'score' => '评分 1~5',
+            'cover_url' => '门店大图',
+            'pic_url' => '门店小图',
+            'shop_time' => '营业时间',
+            'content' => '门店介绍',
+            'docks_id'=>'核销码头id',
+            'docks_name'=>'核销码头名称',
+            'login_address'=>'后台登录地址'
         ];
     }
 
     public function save()
     {
-
-
         if (!$this->validate()) {
             return $this->getModelError();
         }
@@ -84,14 +89,15 @@ class ShopForm extends Model
             $shop->store_id = $this->store_id;
             $shop->user_id=$this->user_id;
         }
-        $shop->attributes = $this->attributes;
-        if(is_array($this->shop_pic)){
-            $shop->cover_url = $this->shop_pic[0];
-        }
-        $shop_pic='';
+             $shop->name=$this->attributes['name'];
+             $shop->mobile=$this->attributes['mobile'];
+             $shop->address=$this->attributes['address'];
+             $shop->latitude=$this->attributes['latitude'];
+             $shop->longitude=$this->attributes['longitude'];
+             $shop->content=$this->attributes['content'];
         if(!is_array($this->shop_pic)){
            $shop_pic= explode(",",$this->shop_pic);
-            $shop->cover_url = $shop_pic[0];
+           $shop->cover_url = $shop_pic[0];
         }
         if ($shop->save()) {
             ShopPic::updateAll(['is_delete' => 1], ['shop_id' => $shop->id]);
@@ -110,7 +116,7 @@ class ShopForm extends Model
         } else {
             return [
                 'code' => 1,
-                'msg' => '网络异常'
+                'msg' => '网络错误'
             ];
         }
     }
