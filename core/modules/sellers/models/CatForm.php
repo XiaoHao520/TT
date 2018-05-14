@@ -15,10 +15,10 @@ use yii\data\Pagination;
 class CatForm extends Model
 {
     public $cat;
-
     public $store_id;
     public $parent_id;
     public $name;
+
     public $pic_url;
     public $big_pic_url;
     public $sort;

@@ -149,16 +149,21 @@ class GoodsController extends Controller
      */
     public function actionGoodsEdit($id = 0)
     {
-
-
         $seller_id = \Yii::$app->session->get("seller_id");
-
         if ($seller_id == null) {
-
             \Yii::$app->response->redirect(\Yii::$app->urlManager->createUrl('sellers/seller/login'))->send();
         }
+        $seller=Seller::findOne($seller_id);
+         if(!$seller){
 
 
+
+             return ['msg'=>'商家信息不正确',
+                 'code'=>1];
+
+         }
+
+          $this->store->id=$seller->store_id;
         $goods = Goods::findOne(['id' => $id]);
         $docks = Dock::find()->where(['is_delete' => 0])->all();
 
@@ -191,8 +196,6 @@ class GoodsController extends Controller
             if ($model['quick_purchase'] == 0) {
                 $model['hot_cakes'] = 0;
             }
-
-
             $model['store_id'] = $this->store->id;
             $form->attributes = $model;
             $form->attr = \Yii::$app->request->post('attr');
@@ -204,8 +207,7 @@ class GoodsController extends Controller
 
             return json_encode($form->save(), JSON_UNESCAPED_UNICODE);
         }
-
-        $cat_list = Cat::find()->where(['store_id' => $this->store->id, 'is_delete' => 0, 'parent_id' => 0])->all();
+        $cat_list = Cat::find()->where(['store_id' =>$this->store->id, 'is_delete' => 0, 'parent_id' => 0])->all();
         $postageRiles = PostageRules::find()->where(['store_id' => $this->store->id, 'is_delete' => 0])->all();
         $card_list = Card::find()->where(['store_id' => $this->store->id, 'is_delete' => 0])->asArray()->all();
         if ($goods->full_cut) {
