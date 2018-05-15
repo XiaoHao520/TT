@@ -555,6 +555,13 @@ if (!$returnUrl)
                         </div>
                     </div>
 
+                    <?php if($goods['seller_id']==null||$goods['seller_id']==0):?>
+                        <input type="hidden" name="model[seller_id]" value="0">
+                    <?php else:?>
+                        <input type="hidden" name="model[seller_id]" value="<?=$goods['seller_id']?>">
+                    <?endif;?>
+
+
                     <div class="form-group row">
                         <div class="col-3 text-right">
                             <label class=" col-form-label required">售价</label>
@@ -1162,6 +1169,34 @@ if (!$returnUrl)
                     </div>
                 </div>
             </div>-->
+
+
+            <div class="step-block" flex="dir:left box:first">
+                <div>
+                    <span>审核状态</span>
+                    <span class="step-location" id="step8"></span>
+                </div>
+                <div>
+                    <label class="radio-label">
+                        <input <?= $goods['shenhe_status'] == 0 ? 'checked' : null ?>
+                                value="0" name="model[shenhe_status]" type="radio"
+                                class="custom-control-input">
+                        <span class="label-icon"></span>
+                        <span class="label-text">待审核</span>
+                    </label>
+                    <label class="radio-label">
+                        <input <?= $goods['shenhe_status'] == 1 ? 'checked' : null ?>
+                                value="1" name="model[shenhe_status]" type="radio"
+                                class="custom-control-input">
+                        <span class="label-icon"></span>
+                        <span class="label-text">通过</span>
+                    </label>
+                </div>
+            </div>
+
+
+
+
             <div class="form-group row text-center">
                 <a class="btn btn-primary auto-form-btn" href="javascript:">保存</a>
             </div>

@@ -17,6 +17,7 @@ use app\models\Goods;
 use app\models\GoodsCard;
 use app\models\GoodsCat;
 use app\models\PostageRules;
+use app\models\Shop;
 use app\modules\mch\models\CatForm;
 use app\modules\mch\models\CopyForm;
 use app\modules\mch\models\GoodsForm;
@@ -83,10 +84,10 @@ class GoodsController extends Controller
         $query = Goods::find()->alias('g')->where(['g.store_id' => $this->store->id, 'g.is_delete' => 0]);
         $query->leftJoin(['c' => Cat::tableName()], 'c.id=g.cat_id');
         $query->leftJoin(['gc' => $query_cat], 'gc.goods_id=g.id');
-
+        $query->leftJoin(['s'=>Shop::tableName()],'s.id=g.seller_id');
         $cat_query = clone $query;
 
-        $query->select('g.id,g.name,g.price,g.original_price,g.status,g.cover_pic,g.sort,g.attr,g.cat_id,g.virtual_sales,g.store_id');
+        $query->select('g.id,g.name,g.price,g.original_price,g.status,g.cover_pic,g.sort,g.attr,g.cat_id,g.virtual_sales,g.store_id,g.shenhe_status,g.seller_name');
         if (trim($keyword)) {
             $query->andWhere(['LIKE', 'g.name', $keyword]);
         }

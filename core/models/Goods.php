@@ -48,6 +48,8 @@ use yii\helpers\VarDumper;
  * @property string $tpl_user
  * @property string $sub_title
  * @property integer $seller_id
+ * @property integer $shenhe_status
+ * @property string $seller_name
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -66,12 +68,13 @@ class Goods extends \yii\db\ActiveRecord
     {
         return [
             [['store_id', 'name', 'detail', 'attr'], 'required'],
-            [['store_id', 'cat_id', 'status', 'addtime', 'is_delete', 'sort', 'virtual_sales', 'individual_share', 'freight', 'use_attr', 'share_type','seller_id'], 'integer'],
+            [['store_id', 'cat_id', 'status', 'addtime', 'is_delete', 'sort', 'virtual_sales', 'individual_share', 'freight', 'use_attr', 'share_type','seller_id','shenhe_status'], 'integer'],
             [['price', 'original_price', 'share_commission_first', 'share_commission_second', 'share_commission_third', 'weight','latitude','longitude'], 'number'],
             [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock','sub_title'], 'string'],
-            [['name', 'unit','timelong'], 'string', 'max' => 255],
+            [['name', 'unit','timelong','seller_name'], 'string', 'max' => 255],
             [['service','tpl_user'], 'string', 'max' => 2000],
-            [['tpl_user'],'default','value'=>0]
+            [['tpl_user'],'default','value'=>0],
+            [['seller_name'],'default','value'=>'管理员']
         ];
     }
 
@@ -112,7 +115,9 @@ class Goods extends \yii\db\ActiveRecord
             'capacity'=>"核载人数",
             'tpl_user'=>'接收模板消息的用户ID',
             'sub_title'=>'商品描述',
-            'seller_id'=>'商家id'
+            'seller_id'=>'商家id',
+            'shenhe_status'=>'审核的状态',
+            'seller_name'=>'商家名字'
         ];
     }
 

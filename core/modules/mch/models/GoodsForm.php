@@ -62,6 +62,8 @@ class GoodsForm extends Model
     public $dock_id;
     public $tpl_user;
     public $sub_title;
+    public $shenhe_status;
+    public $seller_id;
 
     /**
      * @return array
@@ -71,7 +73,7 @@ class GoodsForm extends Model
         return [
             [['name', 'service', 'unit'], 'trim'],
             [['store_id', 'name', 'price', 'cat_id', 'detail', 'goods_pic_list', 'cover_pic', 'address', 'time', 'dock'], 'required'],
-            [['store_id', 'sort', 'virtual_sales', 'freight', 'share_type', 'quick_purchase', 'hot_cakes'], 'integer'],
+            [['store_id', 'sort', 'virtual_sales', 'freight', 'share_type', 'quick_purchase', 'hot_cakes','seller_id'], 'integer'],
             [['price', 'original_price', 'weight'], 'number'],
             [['price',], 'number', 'min' => 0.01,],
             [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', 'tpl_user','sub_title'], 'string'],
@@ -82,7 +84,7 @@ class GoodsForm extends Model
             [['individual_share',], 'default', 'value' => 0],
             [['share_commission_first', 'share_commission_second', 'share_commission_third', 'freight', 'longitude', 'latitude', 'time'], 'default', 'value' => 0],
             [['share_commission_first', 'share_commission_second', 'share_commission_third',], 'number', 'min' => 0],
-            [['goods_num', 'dock_id'], 'integer', 'min' => 0,],
+            [['goods_num', 'dock_id','shenhe_status'], 'integer', 'min' => 0,],
             [['longitude', 'latitude'], 'double', 'min' => 0],
             [['use_attr'], 'safe'],
             [['capacity'], 'default', 'value' => 0],
@@ -118,8 +120,9 @@ class GoodsForm extends Model
             'dock_id' => '码头id',
             'address'=>'商品地址',
             'tel_user'=>'接收模板消息的用户ID',
-            'sub_title'=>'商品描述'
-
+            'sub_title'=>'商品描述',
+            'shenhe_status'=>'审核状态',
+            'seller_id'=>'商家id'
         ];
     }
 
@@ -155,8 +158,6 @@ class GoodsForm extends Model
      */
     public function save()
     {
-
-
         if ($this->validate()) {
             if (!is_array($this->goods_pic_list) || empty($this->goods_pic_list) || count($this->goods_pic_list) == 0 || !$this->goods_pic_list[0])
                 return [

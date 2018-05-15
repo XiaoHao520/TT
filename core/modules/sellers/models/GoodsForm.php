@@ -62,6 +62,7 @@ class GoodsForm extends Model
     public $tpl_user;
     public $sub_title;
     public $seller_id;
+    public $seller_name;
 
     /**
      * @return array
@@ -74,7 +75,7 @@ class GoodsForm extends Model
             [['store_id', 'sort', 'virtual_sales', 'freight', 'share_type', 'quick_purchase', 'hot_cakes'], 'integer'],
             [['price', 'original_price', 'weight'], 'number'],
             [['price',], 'number', 'min' => 0.01,],
-            [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', 'tpl_user','sub_title'], 'string'],
+            [['detail', 'service', 'cover_pic', 'video_url', 'time', 'parameter','timelong', 'tpl_user','sub_title','seller_name'], 'string'],
             [['name', 'capacity'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 1000],
             [['virtual_sales', 'timelong'], 'default', 'value' => 0],
@@ -119,7 +120,8 @@ class GoodsForm extends Model
             'address'=>'商品地址',
             'tel_user'=>'接收模板消息的用户ID',
             'sub_title'=>'商品描述',
-            'seller_id'=>'商家id'
+            'seller_id'=>'商家id',
+            'seller_name'=>'商家用户名'
         ];
     }
 
@@ -211,6 +213,7 @@ class GoodsForm extends Model
             $goods->parameter = $this->parameter;
             //$goods->address = $this->address;
             $goods->seller_id=$this->seller_id;
+            $goods->seller_name=$this->seller_name;
             $goods->status=0;
             $goods->dock_id = $this->dock_id;
            // $goods->sub_title=$this->sub_title;

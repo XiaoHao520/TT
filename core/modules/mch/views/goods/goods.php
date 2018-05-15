@@ -121,8 +121,10 @@ $this->params['active_nav_group'] = 2;
                 <th>售价</th>
                 <th>库存</th>
                 <th>状态</th>
+                <th>审核状态</th>
                 <th>虚拟销量</th>
                 <th>排序</th>
+                <th>商家</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -132,10 +134,12 @@ $this->params['active_nav_group'] = 2;
             <col style="width: 8%">
             <col style="width: 8%">
             <col style="width: 10%">
-            <col style="width: 10%">
-            <col style="width: 10%">
+            <col style="width: 8%">
+            <col style="width: 8%">
             <col style="width: 5%">
-            <col style="width: 13%">
+            <col style="width: 5%">
+            <col style="width: 5%">
+            <col style="width: 10%">
             <tbody>
             <?php foreach ($list as $index => $goods): ?>
                 <tr>
@@ -179,10 +183,25 @@ $this->params['active_nav_group'] = 2;
                         <?php endif ?>
                     </td>
                     <td class="nowrap">
+                        <?php if ($goods->shenhe_status == 1): ?>
+                        通过
+                        <?php else: ?>
+                            <span style="color: red">待审核 </span>
+                        <?php endif ?>
+                    </td>
+
+                    <td class="nowrap">
                         <?= $goods->virtual_sales ?>
                     </td>
                     <td class="nowrap">
                         <?= $goods->sort ?>
+                    </td>
+                    <td class="nowrap">
+                        <?php if($goods['seller_name']==null):?>
+                            管理员
+                        <?php else:?>
+                        <?= $goods['seller_name']?>
+                        <?endif;?>
                     </td>
                     <td class="nowrap">
                         <a class="btn btn-sm btn-primary"

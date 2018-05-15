@@ -91,7 +91,7 @@ class GoodsController extends Controller
         $query->leftJoin(['c' => Cat::tableName()], 'c.id=g.cat_id');
         $query->leftJoin(['gc' => $query_cat], 'gc.goods_id=g.id');
         $cat_query = clone $query;
-        $query->select('g.id,g.name,g.price,g.original_price,g.status,g.cover_pic,g.sort,g.attr,g.cat_id,g.virtual_sales,g.store_id');
+        $query->select('g.id,g.name,g.price,g.original_price,g.status,g.cover_pic,g.sort,g.attr,g.cat_id,g.virtual_sales,g.store_id,g.shenhe_status');
         if (trim($keyword)) {
             $query->andWhere(['LIKE', 'g.name', $keyword]);
         }
@@ -154,6 +154,7 @@ class GoodsController extends Controller
             \Yii::$app->response->redirect(\Yii::$app->urlManager->createUrl('sellers/seller/login'))->send();
         }
         $seller=Seller::findOne($seller_id);
+        $seller_name='admin';
          if(!$seller){
 
 
@@ -204,7 +205,7 @@ class GoodsController extends Controller
             $form->integral = \Yii::$app->request->post('integral');
             $form->goods = $goods;
             $form->seller_id = $seller_id;
-
+            $form->seller_name=$seller->username;
             return json_encode($form->save(), JSON_UNESCAPED_UNICODE);
         }
         $cat_list = Cat::find()->where(['store_id' =>$this->store->id, 'is_delete' => 0, 'parent_id' => 0])->all();
