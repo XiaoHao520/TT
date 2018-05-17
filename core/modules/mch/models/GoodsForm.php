@@ -72,7 +72,7 @@ class GoodsForm extends Model
     {
         return [
             [['name', 'service', 'unit'], 'trim'],
-            [['store_id', 'name', 'price', 'cat_id', 'detail', 'goods_pic_list', 'cover_pic', 'address', 'time', 'dock'], 'required'],
+            [['store_id', 'name', 'price', 'cat_id', 'detail', 'goods_pic_list', 'cover_pic', 'address', 'dock'], 'required'],
             [['store_id', 'sort', 'virtual_sales', 'freight', 'share_type', 'quick_purchase', 'hot_cakes','seller_id'], 'integer'],
             [['price', 'original_price', 'weight'], 'number'],
             [['price',], 'number', 'min' => 0.01,],

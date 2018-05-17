@@ -401,12 +401,12 @@ if (!$returnUrl)
                         </div>
                         <div class="col-9">
                             <input class="form-control short-row" type="text" name="model[capacity]"
-                                   value="<?= $goods['capacity'] ?>">
+                                   value="<?= $goods['capacity'] ?>">  <span style="color: red">*例：10人</span>
                         </div>
                     </div>
 
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">接收通知短信的电话</label>
                         </div>
@@ -423,7 +423,7 @@ if (!$returnUrl)
                         </div>
                         <div class="col-9">
                             <input class="form-control short-row" type="text" name="model[timelong]"
-                                   value="<?= $goods['timelong'] ?>">
+                                   value="<?= $goods['timelong'] ?>"><span style="color: red;">*例：1小时/10人</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -435,7 +435,7 @@ if (!$returnUrl)
                                    value="<?= $goods['unit'] ? $goods['unit'] : '人' ?>">
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">商品排序</label>
                         </div>
@@ -445,7 +445,7 @@ if (!$returnUrl)
                             <div class="text-muted fs-sm">排序按升序排列</div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">开船时间</label>
                         </div>
@@ -457,7 +457,7 @@ if (!$returnUrl)
                     </div>
 
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <div class="col-3 text-right">
                             <label class=" col-form-label">虚拟销量</label>
                         </div>

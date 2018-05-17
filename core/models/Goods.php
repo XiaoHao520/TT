@@ -73,7 +73,7 @@ class Goods extends \yii\db\ActiveRecord
             [['detail', 'attr', 'cover_pic', 'video_url', 'full_cut', 'integral','dock','sub_title'], 'string'],
             [['name', 'unit','timelong','seller_name'], 'string', 'max' => 255],
             [['service','tpl_user'], 'string', 'max' => 2000],
-            [['tpl_user'],'default','value'=>0],
+            [['tpl_user','time'],'default','value'=>0],
             [['seller_name'],'default','value'=>'管理员']
         ];
     }

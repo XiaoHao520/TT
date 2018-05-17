@@ -113,12 +113,44 @@ class GoodsAreaListForm extends Model
             ->leftJoin(['o' => Order::tableName()], 'od.order_id=o.id')
             ->where(['od.is_delete' => 0, 'o.store_id' => $this->store_id, 'o.is_pay' => 1, 'o.is_delete' => 0])->groupBy('od.goods_id')->select('SUM(od.num) num,od.goods_id');
 
-        $list = $query
+      /*  $list = $query
             ->leftJoin(['gn' => $od_query], 'gn.goods_id=g.id')
             ->select('g.id,g.name,g.price,g.original_price,g.cover_pic pic_url,gn.num,g.virtual_sales,g.unit,g.latitude,g.longitude,g.dock,g.capacity,g.timelong')
             ->limit($pagination->limit)
             ->offset($pagination->offset)
-            ->asArray()->all();
+            ->asArray()->all();*/
+
+        $res = $query
+            ->leftJoin(['gn' => $od_query], 'gn.goods_id=g.id')
+            ->select('g.id,g.name,g.price,g.original_price,g.cover_pic pic_url,gn.num,g.virtual_sales,g.unit,g.latitude,g.longitude,g.dock,g.capacity,g.timelong')
+            ->limit($pagination->limit)
+            ->offset($pagination->offset);
+
+            $list=$res->asArray()->all();
+      $commandSql=clone $res;
+        $sql=$commandSql->createCommand()->getRawSql();
+
+
+
+  $sql="SELECT `g`.`id`, `g`.`name`, `g`.`price`, `g`.`original_price`,
+  `g`.`cover_pic` AS `pic_url`, `gn`.`num`, `g`.`virtual_sales`,
+  `g`.`unit`, `g`.`latitude`, `g`.`longitude`, `g`.`dock`, `g`.`capacity`,
+ `g`.`timelong`,(2 * 6378.137* ASIN(SQRT(POW(SIN(PI()*(".$this->lon."-`g`.`longitude`)/360),2)+COS(PI()*".$this->lat."/180)* COS(`g`.`latitude` * PI()/180)*POW(SIN(PI()*(22.959997-`g`.`latitude`)/360),2)))) as juli FROM `hjmall_goods` `g` LEFT JOIN (SELECT SUM(od.num) num, `od`.`goods_id`
+  FROM `hjmall_order_detail` `od` LEFT JOIN `hjmall_order` `o` ON od.order_id=o.id
+  WHERE (`od`.`is_delete`=0) AND (`o`.`store_id`='1')
+  AND (`o`.`is_pay`=1) AND (`o`.`is_delete`=0) GROUP BY `od`.`goods_id`) `gn`
+ ON gn.goods_id=g.id WHERE ((`g`.`status`=1) AND (`g`.`is_delete`=0))
+ AND (`g`.`store_id`='1')
+ ORDER BY juli ASC LIMIT ".($this->page - 1)*$this->limit.','.$this->limit;
+  $db= \Yii::$app->db;
+  $command=$db->createCommand($sql);
+  $res=$command->queryAll();
+  $list=$res;
+
+
+
+
+
 
         foreach ($list as $i => $item) {
             if (!$item['pic_url']) {
@@ -140,6 +172,7 @@ class GoodsAreaListForm extends Model
                 'row_count' => $count,
                 'page_count' => $pagination->pageCount,
                 'list' => $list,
+                'sql'=>$sql
             ],
         ];
 
